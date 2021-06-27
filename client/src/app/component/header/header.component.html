@@ -1,0 +1,39 @@
+<div class="header">
+  <div class="container">
+    <div class="part-right">
+      <a routerLink="/">
+        <img src="./assets/icon.png" alt="icon" class="icon mt-2 mb-2 mr-2">
+        <h1 class="fz-title mr-2">Expired App</h1>
+      </a>
+      <ul class="nav">
+        <li class="p-2"><a routerLink="/">Dashboard</a></li>
+        <li class="p-2"><a routerLink="/items">所有物品</a></li>
+        <li class="p-2"><a routerLink="/expiring">即將到期</a></li>
+        <li class="p-2"><a routerLink="/expired">已過期</a></li>
+      </ul>
+    </div>
+    <div class="part-left">
+      <ul class="nav">
+        <li class="p-2"><a href="">新增物品</a></li>
+        <li class="p-2"><a href="">設定</a></li>
+        <li class="p-2"><a href="">登入</a></li>
+        <li class="p-2"><a href="">註冊</a></li>
+      </ul>
+    </div>
+    <div class="part-mobile">
+      <div class="nav-button" (click)="openNav()">
+        <div class="hamburger"></div>
+      </div>
+      <ul class="part-mobile-nav" [class.click]="isClick">
+        <li class="p-2"><a href="#">Dashboard</a></li>
+        <li class="p-2"><a href="#">所有物品</a></li>
+        <li class="p-2"><a href="#">即將到期</a></li>
+        <li class="p-2"><a href="#">已過期</a></li>
+        <li class="p-2"><a href="">新增物品</a></li>
+        <li class="p-2"><a href="">設定</a></li>
+        <li class="p-2"><a href="">登入</a></li>
+        <li class="p-2"><a href="">註冊</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

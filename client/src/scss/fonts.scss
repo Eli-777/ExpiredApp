@@ -1,0 +1,45 @@
+$fonts: (
+  "body": "Oswald_400Regular",
+  "heading": "Lato_400Regular",
+  "monospace": "Oswald_400Regular",
+);
+
+$lineHeights: (
+  "title": "28px",
+  "copy": "20px",
+);
+
+$fontWeights: (
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
+);
+
+$fontSizes: (
+  "caption": "1.2rem",
+  "button": "1.4rem",
+  "body": "1.6rem",
+  "title": "2rem",
+  "h5": "2.4rem",
+  "h4": "3.4rem",
+  "h3": "4.5rem",
+  "h2": "5.6rem",
+  "h1": "11.2rem",
+);
+
+$font-body: 1.6rem;
+$font-title: 1.6rem;
+
+@each $key, $value in $fontSizes {
+  .fz-#{$key} {
+    font-size: #{$value};
+  }
+}
+
+@each $key, $value in $fontWeights {
+  .fw-#{$key} {
+    font-weight: #{$value};
+  }
+}
+
+

@@ -1,0 +1,13 @@
+.container {
+  max-width: 98rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: auto;
+  display: flex;
+}
+
+@mixin flex($jc: center, $ai: center, $dir: row) {
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $dir;
+}

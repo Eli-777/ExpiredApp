@@ -1,0 +1,14 @@
+:root {
+  --primary: #ABD0CE;
+  --second: #7C7877;
+  --grey: #D9D4CF;
+  --light: #F0E5DE;
+  --error: #F7A399;
+  --dark: #101112;
+}
+
+[data-theme="dark"] {
+  --primary: #101112;
+  --second: #e4e4e4;
+  --third: #7e7777;
+}

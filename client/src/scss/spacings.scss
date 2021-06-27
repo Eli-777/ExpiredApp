@@ -1,0 +1,22 @@
+$space: ("0":"0px", "1":"4px", "2":"8px", "3":"16px", "4":"32px", "5":"64px","auto": "auto");
+
+$props: (
+  "margin": "m",
+  "margin-top": "mt",
+  "margin-bottom": "mb",
+  "margin-left": "ml",
+  "margin-right": "mr",
+  "padding": "p",
+  "padding-top": "pt",
+  "padding-bottom": "pb",
+  "padding-left": "pl",
+  "padding-right": "pr",
+);
+
+@each $prop, $abbrev in $props {
+  @each $key, $value in $space {
+    .#{$abbrev}-#{$key} {
+      #{$prop}: #{$value} !important;
+    }
+  }
+}

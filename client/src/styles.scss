@@ -1,1 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./scss/colors.scss";
+@import "./scss/rwd.scss";
+@import "./scss/sizes.scss";
+@import "./scss/spacings.scss";
+@import "./scss/fonts.scss";
+@import "./scss/flex.scss";
+/* reset css */
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: var(--dark);
+}
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.btn,
+button,
+button:focus,
+input:focus,
+textarea:focus,
+select,
+select:focus,
+a:focus {
+  outline: 0px !important;
+}
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+button[disabled] {
+  pointer-events: none;
+}
+input {
+  padding: 0;
+}
+input:required {
+  box-shadow: none;
+}
+input:invalid {
+  box-shadow: none;
+}
+/* reset css end */
+
+
+html {
+  font-size: 62.5%;
+  @include respond(tab-port) {
+    font-size: 75%;
+  }
+  @include respond(tab-land) {
+    font-size: 87.5%; /* 14 / 16 = 87.5%  1rem = 14px */
+  }
+  @include respond(desktop) {
+    font-size: 75%; /* 12 / 16 = 75%  1rem = 12px */
+  }
+  @include respond(big-desktop) {
+    font-size: 100%; /* 16 / 16 = 100%  1rem = 16px */
+  }
+}
+
+body {
+  font-size: $font-body;
+  background-color: var(--light);
+}

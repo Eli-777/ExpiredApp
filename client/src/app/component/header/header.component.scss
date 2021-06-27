@@ -1,0 +1,92 @@
+@import "../../../styles.scss";
+.header {
+  background-color: var(--primary);
+
+  .container {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .part-right {
+    display: flex;
+    align-items: center;
+    a {
+      display: flex;
+      align-items: center;
+    }
+    .icon {
+      width: 4rem;
+    }
+  }
+
+  .part-mobile {
+    .nav-button {
+      cursor: pointer;
+      width: 3.4rem;
+      height: 2.4rem;
+      border: 0.2rem solid var(--dark);
+      border-radius: .6rem;
+      display: flex;
+      @include flex;
+    }
+    .hamburger {
+      width: 1.6rem;
+      height: 0.2rem;
+      background-color: var(--dark);
+      border-radius: 10%;
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        @extend .hamburger;
+        position: absolute;
+      }
+      &::before {
+        transform: translateY(-0.5rem);
+      }
+      &::after {
+        transform: translateY(0.5rem);
+      }
+    }
+
+    &-nav {
+      display: none;
+      &.click {
+        display: block;
+        position: fixed;
+        top: 6.4rem;
+        left: 0;
+
+        li {
+          border-bottom: 1px solid #000;
+          width: 100vw;
+          text-align: center;
+          background-color: var(--second);
+          cursor: pointer;
+          a {
+            color: var(--light);
+          }
+
+          &:hover {
+            background-color: var(--grey);
+            a {
+              color: var(--dark);
+            }
+          }
+        }
+      }
+    }
+
+    @include respond(tab-land) {
+      display: none;
+    }
+  }
+
+  .nav {
+    display: none;
+    @include respond(tab-land) {
+      display: flex;
+    }
+  }
+}
