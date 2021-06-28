@@ -1,0 +1,48 @@
+[
+  {
+    "ItemName": "Farrell",
+    "ManufacturingDate": "2019-03-12",
+    "ExpiryDay": "2020-05-28",
+    "GuaranteePeriod": 3,
+    "Tag": "調味料",
+    "Location": "廚房",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
+    
+  },
+  {
+    "ItemName": "Rivera",
+    "ManufacturingDate": "2019-01-17",
+    "ExpiryDay": "2020-05-16",
+    "GuaranteePeriod": 2,
+    "Tag": "零食",
+    "Location": "客廳",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/51.jpg"
+  },
+  {
+    "ItemName": "Nash",
+    "ManufacturingDate": "2019-06-15",
+    "ExpiryDay": "2020-06-01",
+    "GuaranteePeriod": 1,
+    "Tag": "保養品",
+    "Location": "房間",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/76.jpg"
+  },
+  {
+    "ItemName": "Oneal",
+    "ManufacturingDate": "2019-03-20",
+    "ExpiryDay": "2020-06-26",
+    "GuaranteePeriod": 15,
+    "Tag": "盥洗用品",
+    "Location": "浴室",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "ItemName": "Maynard",
+    "ManufacturingDate": "2019-04-25",
+    "ExpiryDay": "2020-05-29",
+    "GuaranteePeriod": 20,
+    "Tag": "保養品",
+    "Location": "衣櫥",
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/17.jpg"
+  }
+]
