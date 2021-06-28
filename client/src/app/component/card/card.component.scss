@@ -1,0 +1,32 @@
+.card {
+  width: calc((98rem - 6.4rem -0.8rem  ) / 4 );
+  flex: 1;
+
+  &-border {
+    border: .2rem solid var(--second);
+    border-radius: 1.2rem;
+    box-shadow: 0rem 0rem 0.2rem 0.2rem var(--second);
+
+    &:hover {
+      background-color: var(--primary);
+    }
+  }
+
+  &-title {
+    width: calc(17rem - 0.8rem * 2) ;
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    @extend .card-title;
+  }
+}

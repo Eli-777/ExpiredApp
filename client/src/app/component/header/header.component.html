@@ -25,14 +25,14 @@
         <div class="hamburger"></div>
       </div>
       <ul class="part-mobile-nav" [class.click]="isClick">
-        <li class="p-2"><a href="#">Dashboard</a></li>
-        <li class="p-2"><a href="#">所有物品</a></li>
-        <li class="p-2"><a href="#">即將到期</a></li>
-        <li class="p-2"><a href="#">已過期</a></li>
-        <li class="p-2"><a href="">新增物品</a></li>
-        <li class="p-2"><a href="">設定</a></li>
-        <li class="p-2"><a href="">登入</a></li>
-        <li class="p-2"><a href="">註冊</a></li>
+        <li class="p-2"><a routerLink="/" (click)="openNav()">Dashboard</a></li>
+        <li class="p-2"><a routerLink="/items" (click)="openNav()">所有物品</a></li>
+        <li class="p-2"><a routerLink="/expiring" (click)="openNav()">即將到期</a></li>
+        <li class="p-2"><a routerLink="/expired" (click)="openNav()">已過期</a></li>
+        <li class="p-2"><a href="" (click)="openNav()">新增物品</a></li>
+        <li class="p-2"><a href="" (click)="openNav()">設定</a></li>
+        <li class="p-2"><a href="" (click)="openNav()">登入</a></li>
+        <li class="p-2"><a href="" (click)="openNav()">註冊</a></li>
       </ul>
     </div>
   </div>

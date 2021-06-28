@@ -63,8 +63,9 @@
           width: 100vw;
           text-align: center;
           background-color: var(--second);
-          cursor: pointer;
           a {
+            display: block;
+            width: 100vw;
             color: var(--light);
           }
 
