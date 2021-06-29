@@ -32,7 +32,10 @@ namespace API.Controllers
     public async Task<ActionResult> AddItem(Item item)
     {
       _unitOfWork.ItemRepository.AddItem(item);
-      if (await _unitOfWork.Complete()) return Ok("this item is added!");
+      var response = new {
+        message = "this item is added!"
+      };
+      if (await _unitOfWork.Complete()) return Ok(response);
 
       return BadRequest("Problem adding the item");
     }
@@ -41,8 +44,13 @@ namespace API.Controllers
     public async Task<ActionResult> DeleteItem(int id)
     {
       var item = await _unitOfWork.ItemRepository.GetItem(id);
+      if (item == null) return BadRequest("item is not exist");
+      
       _unitOfWork.ItemRepository.DeleteItem(item);
-      if (await _unitOfWork.Complete()) return Ok($"the item with id = {id}  is delete");
+      var response = new {
+        message = $"the item with id = {id}  is delete"
+      };
+      if (await _unitOfWork.Complete()) return Ok(response);
 
       return BadRequest("Problem deleting the item");
     }
@@ -55,11 +63,15 @@ namespace API.Controllers
       var changedItem =  _mapper.Map(item, originalItem);
 
       _unitOfWork.ItemRepository.Update(changedItem);
-      if (await _unitOfWork.Complete()) return Ok("item is changed!");
+      var response = new {
+        message = "item is changed!"
+      };
+      if (await _unitOfWork.Complete()) return Ok(response);
 
       return BadRequest("Problem setting the item");
 
 
     }
+    
   }
 }

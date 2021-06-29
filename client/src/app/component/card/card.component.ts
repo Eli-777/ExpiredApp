@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { ItemService } from './../../_services/item.service';
+import { Item } from './../../interfaces/items';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
+  @Input() item!: Item;
 
-  constructor() { }
+  constructor(public itemService: ItemService) { }
 
   ngOnInit(): void {
+  }
+
+  deleteItem( event: any ,id: number) {
+    event.cancelBubble = true
+    event.preventDefault()
+    this.itemService.deleteItem(id).pipe(take(1)).subscribe()
   }
 
 }

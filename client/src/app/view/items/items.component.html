@@ -1,9 +1,3 @@
 <div class="cards m-4">
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
+  <app-card *ngFor="let item of (itemService.items)" [item]="item"></app-card>
 </div>

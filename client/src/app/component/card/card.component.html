@@ -1,13 +1,25 @@
 <div class="card p-2">
-  <div class="card-border p-2">
-    <a routerLink="/items">
-      <img src="../../../assets/image-not-found.svg" alt="item image" />
-      <h2 class="fz-body fw-medium card-title">麥片</h2>
+  <a routerLink="/items/{{ item.id }}">
+    <div class="card-border p-2">
+      <div class="card-img-wrapper">
+        <img
+          class="card-img"
+          src="{{ item.photoUrl || ' ../../../assets/image-not-found.svg' }}"
+          alt="item image"
+        />
+        <app-button class="delete-icon" (click)="deleteItem($event,item.id)" [hidden]="itemService.isLoading" ></app-button>
+      </div>
+      <h2 class="fz-body fw-medium card-title">{{ item.itemName }}</h2>
       <p class="fz-caption card-body">
-        <span><span class="fw-medium">到期日：</span>2021/12/20</span>
-        <span> <span class="fw-medium">類別：</span>食品</span>
-        <span> <span class="fw-medium">放置場所：</span>bush 房間</span>
+        <span
+          ><span class="fw-medium">到期日：</span
+          >{{ item.expiryDay | date }}</span
+        >
+        <span> <span class="fw-medium">類別：</span>{{ item.tag }}</span>
+        <span>
+          <span class="fw-medium">放置場所：</span>{{ item.location }}</span
+        >
       </p>
-    </a>
-  </div>
+    </div>
+  </a>
 </div>

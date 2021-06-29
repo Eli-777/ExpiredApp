@@ -1,0 +1,18 @@
+.btn {
+  background-color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: .4rem;
+  box-shadow: 0 0 .4rem 0rem var(--dark);
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: darken(#fff, 10%);
+  }
+}
+
+.btn-error {
+  background-color: var(--error);
+  &:hover {
+    background-color: darken(#F7A399, 10%) !important;
+  }
+}
