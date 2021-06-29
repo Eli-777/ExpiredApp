@@ -1,1 +1,5 @@
-<button class="btn btn-error"><i class="fa fa-trash fz-button"></i></button>
+<button class="btn btn-error" *ngIf="buttonName === 'delete'">
+  <i class="fa fa-trash fz-button"></i>
+</button>
+
+<button class="btn fz-body" [class]="btnClass" *ngIf="buttonName !== 'delete'">{{ buttonName }}</button>

@@ -32,13 +32,13 @@ $font-title: 1.6rem;
 
 @each $key, $value in $fontSizes {
   .fz-#{$key} {
-    font-size: #{$value};
+    font-size: #{$value} !important;
   }
 }
 
 @each $key, $value in $fontWeights {
   .fw-#{$key} {
-    font-weight: #{$value};
+    font-weight: #{$value} !important;
   }
 }
 

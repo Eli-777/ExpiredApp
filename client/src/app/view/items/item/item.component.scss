@@ -1,0 +1,29 @@
+@import '../../../../styles.scss';
+
+.item-form-wrapper {
+  width: 100vw;
+  @include flex(center, center, column)
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+
+  label {
+    width: 10rem;
+  }
+
+  input {
+    width: 20rem;
+  }
+}
+
+.form-img {
+  height: 30rem;
+  object-fit: cover;
+}
+
+.button-wrapper {
+  display: flex;
+  @include flex(space-evenly);
+}
