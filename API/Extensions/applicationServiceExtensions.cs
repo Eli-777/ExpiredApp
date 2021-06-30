@@ -1,5 +1,5 @@
 using API.Interfaces;
-using API.Modal;
+using API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

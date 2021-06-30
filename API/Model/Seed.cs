@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modal
+namespace API.Model
 {
   public class Seed
   {
@@ -13,7 +13,7 @@ namespace API.Modal
         if(await context.Items.AnyAsync()) return;
 
         var itemData = await System.IO.File.ReadAllTextAsync(
-            "Modal/ItemsSeed.json"
+            "Model/ItemsSeed.json"
         );
 
         var items = JsonSerializer.Deserialize<List<Item>>(itemData);

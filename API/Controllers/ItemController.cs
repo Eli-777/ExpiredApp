@@ -20,16 +20,17 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Item>>> GetItems()
+    public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems()
     {
       var items = await _unitOfWork.ItemRepository.GetItems();
+      var itemsToReturn =  _mapper.Map<IEnumerable<ItemDto>>(items);
 
-      return Ok(items);
+      return Ok(itemsToReturn);
 
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Item>> GetItem(int id)
+    public async Task<ActionResult<ItemDto>> GetItem(int id)
     {
       var item = await _unitOfWork.ItemRepository.GetItem(id);
       var response = new 
@@ -39,20 +40,28 @@ namespace API.Controllers
     
       if (item == null) return NotFound(response);
 
-      return Ok(item);
+      var itemToReturn =  _mapper.Map<ItemDto>(item);
+      return Ok(itemToReturn);
 
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddItem(Item item)
+    public async Task<ActionResult<ItemDto>> AddItem(Item item)
     {
-      _unitOfWork.ItemRepository.AddItem(item);
-      var response = new {
-        message = "this item is added!"
+      _unitOfWork.ItemRepository.AddItem(item);     
+      
+      if (await _unitOfWork.Complete()) 
+      {
+        var newItem = await _unitOfWork.ItemRepository.GetAddedItem();
+        var changedItem =  _mapper.Map<ItemDto>(newItem);
+        return Ok(changedItem);
       };
-      if (await _unitOfWork.Complete()) return Ok(response);
 
-      return BadRequest("Problem adding the item");
+      var response = new {
+        message = "Problem adding the item"
+      };
+
+      return BadRequest(response);
     }
 
     [HttpDelete("{id}")]

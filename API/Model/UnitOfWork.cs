@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using API.Interfaces;
 
-namespace API.Modal
+namespace API.Model
 {
   public class UnitOfWork : IUnitOfWork
   {

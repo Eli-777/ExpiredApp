@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { Item } from '../interfaces/items';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -32,11 +33,9 @@ export class ItemService {
   }
 
   addItem(item: Item) {
-    return this.http.post(this.baseUrl + 'item', item).pipe(
-      map((response) => {
-        console.log('after post = ', response);
-
-        this.items.push(item);
+    return this.http.post<Item>(this.baseUrl + 'item', item).pipe(
+      map((newItem) => {
+        this.items.push(newItem);
       })
     );
   }

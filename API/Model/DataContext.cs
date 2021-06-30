@@ -1,7 +1,7 @@
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modal
+namespace API.Model
 {
   public class DataContext: DbContext
   {

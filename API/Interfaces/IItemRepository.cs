@@ -11,6 +11,7 @@ namespace API.Interfaces
         void DeleteItem(Item item);
         Task<Item> GetItem(int id);
         void Update(Item item);
+        Task<Item> GetAddedItem();
 
     }
 }

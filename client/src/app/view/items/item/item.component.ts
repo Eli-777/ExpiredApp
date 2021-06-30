@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { ItemService } from './../../../_services/item.service';
 import { Item } from './../../../interfaces/items';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-item',
@@ -15,6 +16,7 @@ export class ItemComponent implements OnInit {
   item?: Item;
   itemForm!: FormGroup;
   itemId = this.route.snapshot.paramMap.get('id');
+
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +30,7 @@ export class ItemComponent implements OnInit {
     this.itemForm = this.fb.group({
       itemName: [null, Validators.required],
       manufacturingDate: [],
-      expiryDay: [],
+      expiryDate: [],
       guaranteePeriod: [],
       tag: [],
       location: [],
@@ -77,5 +79,9 @@ export class ItemComponent implements OnInit {
           this.location.back();
         });
     }
+  }
+
+  expiryMinDate() {
+    return moment(new Date(this.itemForm.value.manufacturingDate));
   }
 }

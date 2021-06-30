@@ -37,13 +37,14 @@
     </div>
 
     <div class="input-group m-2">
-      <label for="expiryDay"  class="fz-body">到期日期</label>
+      <label for="expiryDate"  class="fz-body">到期日期</label>
       <mat-form-field appearance="fill">
         <input
           matInput
+          [min]="expiryMinDate()"
           [matDatepicker]="picker2"
-          formControlName="expiryDay"
-          id="expiryDay"
+          formControlName="expiryDate"
+          id="expiryDate"
         />
         <mat-datepicker-toggle
           matSuffix

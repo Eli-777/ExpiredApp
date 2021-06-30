@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modal
+namespace API.Model
 {
   public class ItemRepository : IItemRepository
   {
@@ -32,6 +34,11 @@ namespace API.Modal
     public async Task<IEnumerable<Item>> GetItems()
     {
       return await _context.Items.ToListAsync();
+    }
+
+    public async Task<Item> GetAddedItem()
+    {
+      return await _context.Items.OrderBy(Items => Items.CreatedDate).LastOrDefaultAsync();
     }
 
     public void Update(Item item)
