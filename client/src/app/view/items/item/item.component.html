@@ -1,5 +1,5 @@
 <div class="container item-form-wrapper p-4">
-  <h2 class="fz-title m-2">編輯物品</h2>
+  <h2 class="fz-title mb-4">{{itemId ? "編輯物品" : "新增物品"}}</h2>
   <form [formGroup]="itemForm">
     <img
       class="form-img"
@@ -80,6 +80,7 @@
 
     <div class="button-wrapper mt-3">
       <app-button
+        *ngIf="itemId"
         [buttonName]="'修改'"
         btnClass="btn-add"
         (click)="editItem()"

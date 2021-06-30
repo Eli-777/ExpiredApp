@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { ItemService } from './../../../_services/item.service';
@@ -19,13 +19,14 @@ export class ItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
+    private router: Router,
     private location: Location,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.itemForm = this.fb.group({
-      itemName: [],
+      itemName: [null, Validators.required],
       manufacturingDate: [],
       expiryDay: [],
       guaranteePeriod: [],
@@ -51,7 +52,7 @@ export class ItemComponent implements OnInit {
     this.itemService
       .addItem(this.itemForm.value)
       .pipe(take(1))
-      .subscribe(() => this.location.back());
+      .subscribe(() => this.router.navigate(['/items']));
   }
 
   editItem() {

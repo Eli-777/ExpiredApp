@@ -1,6 +1,11 @@
 @import "../../../styles.scss";
 .header {
   background-color: var(--primary);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+
 
   .container {
     justify-content: space-between;

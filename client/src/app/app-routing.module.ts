@@ -11,6 +11,10 @@ const routes: Routes = [
     component: ItemsComponent,
   },
   {
+    path: 'items/add',
+    component: ItemComponent,
+  },
+  {
     path: 'items/:id',
     component: ItemComponent,
   },
