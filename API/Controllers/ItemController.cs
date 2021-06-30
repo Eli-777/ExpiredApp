@@ -28,6 +28,21 @@ namespace API.Controllers
 
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Item>> GetItem(int id)
+    {
+      var item = await _unitOfWork.ItemRepository.GetItem(id);
+      var response = new 
+      {
+        message = "this item is not found"
+      };
+    
+      if (item == null) return NotFound(response);
+
+      return Ok(item);
+
+    }
+
     [HttpPost]
     public async Task<ActionResult> AddItem(Item item)
     {
