@@ -8,14 +8,12 @@
 .input-group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   label {
     width: 10rem;
   }
 
-  input {
-    width: 20rem;
-  }
 }
 
 .form-img {
@@ -26,4 +24,10 @@
 .button-wrapper {
   display: flex;
   @include flex(space-evenly);
+}
+
+
+
+mat-form-field {
+  flex: 1;
 }

@@ -10,6 +10,7 @@ import { Item } from '../interfaces/items';
 export class ItemService {
   baseUrl = environment.apiUrl;
   items: Item[] = [];
+  item?: Item;
   isLoading = false;
 
   constructor(private http: HttpClient) {}
@@ -17,15 +18,17 @@ export class ItemService {
   getItems() {
     return this.http.get<Item[]>(this.baseUrl + 'item').pipe(
       map((items) => {
-        items.forEach((item) => {
-          if (item.manufacturingDate || item.expiryDay) {
-            item.manufacturingDate = new Date(item.manufacturingDate!);
-            item.expiryDay = new Date(item.expiryDay!);
-          }
-        });
         this.items = items;
       })
     );
+  }
+
+  getItem(id: number) {
+    return this.http.get<Item>(this.baseUrl + 'item/' + id).pipe(
+      map(item => {
+        this.item = item
+      })
+    )
   }
 
   addItem(item: Item) {

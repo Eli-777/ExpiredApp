@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { take } from 'rxjs/operators';
 import { ItemService } from './../../../_services/item.service';
@@ -12,14 +12,13 @@ import { Item } from './../../../interfaces/items';
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent implements OnInit {
-  item!: Item;
+  item?: Item;
   itemForm!: FormGroup;
   itemId = this.route.snapshot.paramMap.get('id');
 
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
-    private router: Router,
     private location: Location,
     private fb: FormBuilder
   ) {}
@@ -33,21 +32,17 @@ export class ItemComponent implements OnInit {
       tag: [],
       location: [],
     });
+    this.getItem();
+  }
+
+
+  getItem() {
     if (this.itemId) {
-      this.item = this.itemService.items.find(
-        (item) => item.id === +this.itemId!
-      )!;
-
-      this.item.manufacturingDate = (<Date> this.item.manufacturingDate).toISOString().split('T')[0]
-      this.item.expiryDay = (<Date> this.item.expiryDay).toISOString().split('T')[0]
-
-      this.itemForm.setValue({
-        itemName: this.item.itemName,
-        manufacturingDate: this.item.manufacturingDate,
-        expiryDay: this.item.expiryDay,
-        guaranteePeriod: this.item.guaranteePeriod,
-        tag: this.item.tag,
-        location: this.item.location,
+      this.itemService.getItem(+this.itemId).subscribe(() => {
+        this.item = this.itemService.item;
+        if (this.item) {
+          this.itemForm.reset(this.item);
+        }
       });
     }
   }
@@ -69,7 +64,7 @@ export class ItemComponent implements OnInit {
 
   notChange() {
     this.itemForm.reset(this.item);
-    this.location.back()
+    this.location.back();
   }
 
   deleteItem() {

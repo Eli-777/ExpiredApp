@@ -8,37 +8,74 @@
       }}"
       alt="item image"
     />
+
     <div class="input-group m-2">
-      <label for="name">物品名稱</label>
-      <input id="name" type="text" formControlName="itemName" required />
+      <label for="name" class="fz-body">物品名稱</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          id="name"
+          type="text"
+          formControlName="itemName"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="input-group m-2">
+      <label for="manufacturingDate"  class="fz-body">製造日期</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="manufacturingDate"
+          id="manufacturingDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi="true"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="input-group m-2">
+      <label for="expiryDay"  class="fz-body">到期日期</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          formControlName="expiryDay"
+          id="expiryDay"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2 touchUi="true"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="input-group m-2">
+      <label for="guaranteePeriod"  class="fz-body">有效期限</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          id="guaranteePeriod"
+          type="text"
+          formControlName="guaranteePeriod"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="input-group m-2">
+      <label for="tag"  class="fz-body">類別</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="tag" type="text" formControlName="tag" />
+      </mat-form-field>
     </div>
     <div class="input-group m-2">
-      <label for="manufacturingDate">製造日期</label>
-      <input
-        id="manufacturingDate"
-        type="date"
-        formControlName="manufacturingDate"
-      />
-    </div>
-    <div class="input-group m-2">
-      <label for="expiryDay">到期日期</label>
-      <input id="expiryDay" type="date" formControlName="expiryDay" />
-    </div>
-    <div class="input-group m-2">
-      <label for="guaranteePeriod">有效期限</label>
-      <input
-        id="guaranteePeriod"
-        type="text"
-        formControlName="guaranteePeriod"
-      />
-    </div>
-    <div class="input-group m-2">
-      <label for="tag">類別</label>
-      <input id="tag" type="text" formControlName="tag" />
-    </div>
-    <div class="input-group m-2">
-      <label for="location">所在位置</label>
-      <input id="location" type="text" formControlName="location" />
+      <label for="location"  class="fz-body">所在位置</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="location" type="text" formControlName="location" />
+      </mat-form-field>
     </div>
 
     <div class="button-wrapper mt-3">
