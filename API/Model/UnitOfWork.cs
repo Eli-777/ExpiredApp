@@ -1,17 +1,20 @@
 using System.Threading.Tasks;
 using API.Interfaces;
+using AutoMapper;
 
 namespace API.Model
 {
   public class UnitOfWork : IUnitOfWork
   {
     private readonly DataContext _context;
-    public UnitOfWork(DataContext context)
+    private readonly IMapper _mapper;
+    public UnitOfWork(DataContext context, IMapper mapper)
     {
+      _mapper = mapper;
       _context = context;
     }
 
-    public IItemRepository ItemRepository => new ItemRepository(_context);
+    public IItemRepository ItemRepository => new ItemRepository(_context, _mapper);
 
     public async Task<bool> Complete()
     {

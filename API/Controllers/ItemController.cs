@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -20,12 +21,11 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems()
+    public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems([FromQuery]ItemParams itemParams)
     {
-      var items = await _unitOfWork.ItemRepository.GetItems();
-      var itemsToReturn =  _mapper.Map<IEnumerable<ItemDto>>(items);
+      var items = await _unitOfWork.ItemRepository.GetItems(itemParams);
 
-      return Ok(itemsToReturn);
+      return Ok(items);
 
     }
 
@@ -53,8 +53,7 @@ namespace API.Controllers
       if (await _unitOfWork.Complete()) 
       {
         var newItem = await _unitOfWork.ItemRepository.GetAddedItem();
-        var changedItem =  _mapper.Map<ItemDto>(newItem);
-        return Ok(changedItem);
+        return Ok(newItem);
       };
 
       var response = new {
