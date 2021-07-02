@@ -29,7 +29,8 @@ import { LoginComponent } from './view/login/login.component';
 import { RegisterComponent } from './view/register/register.component';
 import { SettingComponent } from './view/setting/setting.component';
 import { OptionsComponent } from './view/options/options.component';
-import { OptionTableComponent } from './view/options/option-table/option-table.component';
+import { OptionListsComponent } from './view/options/option-lists/option-lists.component';
+import { OptionListComponent } from './view/options/option-list/option-list.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -55,7 +56,8 @@ export const TW_FORMATS = {
     RegisterComponent,
     SettingComponent,
     OptionsComponent,
-    OptionTableComponent,
+    OptionListsComponent,
+    OptionListComponent,
   ],
   imports: [
     BrowserModule,

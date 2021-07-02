@@ -1,0 +1,36 @@
+@import '../.../../../../../styles.scss';
+
+.options {
+  &-list {
+    background-color: rgba(0, 0, 0, 0.04);;
+    padding: 2rem;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    @include flex(space-between, center);
+    position: relative;
+
+    &:hover {
+      background-color: var(--primary);
+    }
+  }
+
+  &-input {
+    line-height: 2rem;
+    background-color: rgba(0, 0, 0, 0.04);
+    border:  none;
+    position: absolute;
+    display: none;
+
+    &.isEdit {
+      display: block;
+      z-index: 1000;
+    }
+  }
+}
+
+.deleteIcon {
+  &:hover {
+    color: var(--delete)
+  }
+}

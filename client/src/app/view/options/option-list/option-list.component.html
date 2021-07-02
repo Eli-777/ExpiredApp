@@ -1,0 +1,15 @@
+<li class="mb-3" (dblclick)="onDoubleClick($event)">
+  <div class="options-list fz-body">
+    <span>{{ list.tagName }}</span>
+    <i class="fa fa-times-circle fz-h5 deleteIcon"></i>
+    <input
+      #listInput
+      (blur)="onBlur()"
+      (keyup.enter)="onEnter()"
+      type="text"
+      [class.isEdit]="list.isEdit"
+      class="options-input fz-body"
+      [(ngModel)]="list.tagName"
+    />
+  </div>
+</li>

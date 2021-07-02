@@ -1,0 +1,8 @@
+<div class="add-section">
+  <input class="fz-title addInput mr-4" type="text" [(ngModel)]="newList" />
+  <app-button buttonName="新增" (click)="addList()"></app-button>
+</div>
+
+<ul class="options-section mt-4">
+  <app-option-list *ngFor="let list of lists" [list]="list"></app-option-list>
+</ul>

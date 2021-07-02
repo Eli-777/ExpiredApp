@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OptionTableComponent } from './option-table.component';
+import { OptionListsComponent } from './option-lists.component';
 
-describe('OptionTableComponent', () => {
-  let component: OptionTableComponent;
-  let fixture: ComponentFixture<OptionTableComponent>;
+describe('OptionListsComponent', () => {
+  let component: OptionListsComponent;
+  let fixture: ComponentFixture<OptionListsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OptionTableComponent ]
+      declarations: [ OptionListsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OptionTableComponent);
+    fixture = TestBed.createComponent(OptionListsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
