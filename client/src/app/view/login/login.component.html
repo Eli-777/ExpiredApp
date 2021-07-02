@@ -1,0 +1,28 @@
+<div class="container form-center-wrapper pb-4">
+  <h1 class="fz-title m-4">登入</h1>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="input-group m-2">
+      <label for="account" class="fz-body">帳號</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="account" type="text" name="account" [(ngModel)]="user.account"/>
+      </mat-form-field>
+    </div>
+    <div class="input-group m-2">
+      <label for="password" class="fz-body">密碼</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="password" type="password" name="password" [(ngModel)]="user.password" />
+      </mat-form-field>
+    </div>
+
+    <div class="button-wrapper mt-3">
+      <app-button [buttonName]="'登入'" btnClass="btn-add" [type]="'submit'" ></app-button>
+
+      <app-button
+        [buttonName]="'註冊'"
+        btnClass="btn-cancel"
+        routerLink="/register"
+        [type]="'button'"
+      ></app-button>
+    </div>
+  </form>
+</div>

@@ -1,3 +1,9 @@
+@import '../../../styles.scss';
+
+.items-wrapper {
+  @include flex(center, center, column)
+}
+
 .cards {
   display: flex;
   flex-flow: row wrap;

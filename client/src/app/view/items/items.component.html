@@ -1,3 +1,6 @@
-<div class="cards m-4">
-  <app-card *ngFor="let item of items" [item]="item"></app-card>
+<div class="container items-wrapper pb-4">
+  <h1 class="fz-title m-4">{{pageTitle}}</h1>
+  <div class="cards">
+    <app-card *ngFor="let item of items" [item]="item"></app-card>
+  </div>
 </div>

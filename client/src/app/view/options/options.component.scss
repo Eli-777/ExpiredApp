@@ -1,0 +1,49 @@
+.tap {
+
+  &-group {
+    display: flex;
+    position: relative;
+  }
+
+
+  &-button {
+    padding: 1.2rem 4rem 0.8rem 4rem;
+    border-bottom: 1px solid var(--grey);
+    cursor: pointer;
+    position: relative;
+
+
+    .active,
+    &:hover {
+      color: var(--dark);
+      border-color: var(--second);
+    }
+
+    a {
+      color: var(--grey);
+      display: block;
+      width: 11.2rem;
+      margin: -1.2rem -4rem -0.8rem -4rem;
+      text-align: center;
+
+      &:hover {
+        color: var(--dark);
+      }
+    }
+  }
+
+  &-bar {
+    height: 2px;
+    width: 11.2rem;
+    background-color: var(--second);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: left 0.5s ease-out;
+
+    &.position {
+      left: 11.2rem;
+      transition: left 0.5s  ease-out;
+    }
+  }
+}

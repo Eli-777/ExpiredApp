@@ -15,9 +15,10 @@
     <div class="part-left">
       <ul class="nav">
         <li class="p-2"><a routerLink="/items/add">新增物品</a></li>
-        <li class="p-2"><a href="">設定</a></li>
-        <li class="p-2"><a href="">登入</a></li>
-        <li class="p-2"><a href="">註冊</a></li>
+        <li class="p-2"><a routerLink="/options/tags">管理選項</a></li>
+        <li class="p-2"><a routerLink="/setting">設定</a></li>
+        <li class="p-2"><a routerLink="/login">登入</a></li>
+        <li class="p-2"><a routerLink="/register">註冊</a></li>
       </ul>
     </div>
     <div class="part-mobile">
@@ -30,9 +31,10 @@
         <li class="p-2"><a routerLink="/expiring" (click)="openNav()">即將到期</a></li>
         <li class="p-2"><a routerLink="/expired" (click)="openNav()">已過期</a></li>
         <li class="p-2"><a routerLink="/items/add" (click)="openNav()">新增物品</a></li>
-        <li class="p-2"><a href="" (click)="openNav()">設定</a></li>
-        <li class="p-2"><a href="" (click)="openNav()">登入</a></li>
-        <li class="p-2"><a href="" (click)="openNav()">註冊</a></li>
+        <li class="p-2"><a routerLink="/options/tags" (click)="openNav()">管理選項</a></li>
+        <li class="p-2"><a routerLink="/setting" (click)="openNav()">設定</a></li>
+        <li class="p-2"><a routerLink="/login" (click)="openNav()">登入</a></li>
+        <li class="p-2"><a routerLink="/register" (click)="openNav()">註冊</a></li>
       </ul>
     </div>
   </div>

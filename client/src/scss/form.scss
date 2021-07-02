@@ -1,0 +1,40 @@
+.form-center-wrapper {
+  @include flex(center, center, column)
+}
+
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    width: 12rem;
+  }
+
+  .mat-form-field-infix {
+    width: 20rem;
+  }
+
+}
+
+.slide-toggle {
+  &-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-filed {
+    width: calc(20rem + 0.75em *2);
+    height: 3.6rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+.button-wrapper {
+  display: flex;
+  @include flex(space-evenly);
+}

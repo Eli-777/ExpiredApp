@@ -1,0 +1,40 @@
+<div class="container form-center-wrapper pb-4">
+  <h1 class="fz-title m-4">註冊</h1>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    <div class="input-group m-2">
+      <label for="account" class="fz-body">帳號</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="account" type="text" name="account" [(ngModel)]="user.account" />
+      </mat-form-field>
+    </div>
+    <div class="input-group m-2">
+      <label for="username" class="fz-body">會員名稱</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="username" type="text" name="username" [(ngModel)]="user.username"/>
+      </mat-form-field>
+    </div>
+    <div class="input-group m-2">
+      <label for="password" class="fz-body">密碼</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="password" type="password" name="password" [(ngModel)]="user.password"/>
+      </mat-form-field>
+    </div>
+    <div class="input-group m-2">
+      <label for="passwordCheck" class="fz-body">確認密碼</label>
+      <mat-form-field appearance="fill">
+        <input matInput id="passwordCheck" type="password" name="passwordCheck" [(ngModel)]="user.passwordCheck"/>
+      </mat-form-field>
+    </div>
+
+    <div class="button-wrapper mt-3">
+      <app-button [buttonName]="'註冊'" btnClass="btn-add" [type]="'submit'"></app-button>
+
+      <app-button
+        [buttonName]="'登入'"
+        btnClass="btn-cancel"
+        routerLink="/login"
+        [type]="'button'"
+      ></app-button>
+    </div>
+  </form>
+</div>

@@ -15,6 +15,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   items: Item[] = [];
   itemsSub!: Subscription;
   page: string = ''
+  pageTitle: string = '所有物品'
 
   constructor(public itemService: ItemService, private route: ActivatedRoute) {}
 
@@ -22,6 +23,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.page = this.route.snapshot.url[0].path
+    if (this.page === 'expiring')  this.pageTitle = "即將到期"
+    if (this.page === 'expired')  this.pageTitle = "已過期"
 
     if (this.page === 'expiring' && !this.itemService.expiringItems$.value.length) {
       this.getData(new ItemParams(50, false));

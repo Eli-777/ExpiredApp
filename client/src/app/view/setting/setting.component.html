@@ -1,0 +1,51 @@
+<div class="container form-center-wrapper pb-4">
+  <h1 class="fz-title m-4">設定</h1>
+  <form (ngSubmit)="onSubmit()" #settingForm="ngForm">
+    <div class="input-group m-2">
+      <label for="expiringDay" class="fz-body">到期距離天數</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          id="expiringDay"
+          type="number"
+          name="expiringDay"
+          [(ngModel)]="settingOption.expiringDay"
+        />
+      </mat-form-field>
+    </div>
+    <div class="input-group m-2">
+      <label for="username" class="fz-body">會員名稱</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          id="username"
+          type="text"
+          name="username"
+          [(ngModel)]="settingOption.username"
+        />
+      </mat-form-field>
+    </div>
+    <div class="slide-toggle-group m-2">
+      <label for="darkMode" class="fz-body">dark mode</label>
+      <div class="slide-toggle-filed">
+        <mat-slide-toggle
+          name="darkMode"
+          color="primary"
+          (change)="darkModeToggle()"
+          [(ngModel)]="settingOption.darkMode"
+        ></mat-slide-toggle>
+      </div>
+    </div>
+
+    <div class="button-wrapper mt-3">
+      <app-button [buttonName]="'設定'" btnClass="btn-add" [type]="'submit'" ></app-button>
+
+      <app-button
+        [buttonName]="'取消'"
+        btnClass="btn-cancel"
+        routerLink="/register"
+        [type]="'button'"
+      ></app-button>
+    </div>
+  </form>
+</div>
