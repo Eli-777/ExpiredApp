@@ -3,14 +3,16 @@ using System;
 using API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Modal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210703081709_ChangeIdName")]
+    partial class ChangeIdName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +36,8 @@ namespace API.Modal.Migrations
                     b.Property<string>("ItemName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ManufacturingDate")
                         .HasColumnType("TEXT");
@@ -43,10 +45,14 @@ namespace API.Modal.Migrations
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Tag")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("TagId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("TagId");
 
                     b.ToTable("Items");
                 });
@@ -83,6 +89,21 @@ namespace API.Modal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("API.Entities.Item", b =>
+                {
+                    b.HasOne("API.Entities.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("API.Entities.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Tag");
                 });
 #pragma warning restore 612, 618
         }

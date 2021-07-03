@@ -10,6 +10,10 @@ namespace API.Services
     {
         CreateMap<ItemDto, Item>();
         CreateMap<Item, ItemDto>();
+        CreateMap<TagDto, Tag>();
+        CreateMap<Tag, TagDto>();
+        CreateMap<LocationDto, Location>();
+        CreateMap<Location, LocationDto>();
     }
   }
 }

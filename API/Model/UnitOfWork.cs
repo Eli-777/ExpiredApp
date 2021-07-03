@@ -15,6 +15,8 @@ namespace API.Model
     }
 
     public IItemRepository ItemRepository => new ItemRepository(_context, _mapper);
+    public ITagRepository TagRepository => new TagRepository(_context, _mapper);
+    public ILocationRepository LocationRepository => new LocationRepository(_context, _mapper);
 
     public async Task<bool> Complete()
     {
