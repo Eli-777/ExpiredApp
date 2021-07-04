@@ -9,8 +9,8 @@ namespace API.Entities
         public Nullable<DateTime> ManufacturingDate { get; set; }
         public Nullable<DateTime> ExpiryDate { get; set; }
         public int GuaranteePeriod { get; set; }
-        public string Tag { get; set; }
-        public string Location { get; set; }
+        public Tag Tag { get; set; }
+        public Location Location { get; set; }
         public string PhotoUrl { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 

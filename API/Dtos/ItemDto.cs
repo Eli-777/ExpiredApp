@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace API.Dtos
 {
-    public class ItemDto
+  public class ItemDto
     {
         public int Id { get; set; }
         [Required]
@@ -11,8 +11,8 @@ namespace API.Dtos
         public Nullable<DateTime> ManufacturingDate { get; set; }
         public Nullable<DateTime> ExpiryDate { get; set; }
         public int GuaranteePeriod { get; set; }
-        public string Tag { get; set; }
-        public string Location { get; set; }
+        public TagDto Tag { get; set; }
+        public LocationDto Location { get; set; }
         public string PhotoUrl { get; set; }
     }
 }

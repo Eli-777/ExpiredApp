@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace API.Entities
 {
@@ -7,5 +8,6 @@ namespace API.Entities
         public int Id { get; set; }
         public string LocationName { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+        public ICollection<Item> Items { get; set; }
     }
 }

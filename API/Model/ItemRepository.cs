@@ -41,6 +41,8 @@ namespace API.Model
     {
       var query = _context.Items.AsQueryable();
       var today = DateTime.UtcNow;
+
+      query = query.Include(i => i.Tag);
       
       if (itemParams.IsExpired)
       {

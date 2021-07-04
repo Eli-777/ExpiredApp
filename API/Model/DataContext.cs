@@ -18,13 +18,15 @@ namespace API.Model
       base.OnModelCreating(builder);
 
       // builder.Entity<Item>()
-      //   .HasOne(i => i.Tag)
-      //   .WithOne(t => t.TagName)
-      //   .HasForeignKey(t => t.TagId);
+      //   .HasOne(i => i.TagId)
+      //   .WithMany(t => t.Items)
+      //   .HasForeignKey(i => i.Id);
 
-      // builder.Entity<Item>()
-      //   .HasOne(i => i.Location)
-      //   .WithOne();
+      // builder.Entity<Tag>()
+      //   .HasMany(t => t.Items)
+      //   .WithOne(i => i.TagId)
+      //   .HasForeignKey(t => t.Id);
+
     }
 
   }

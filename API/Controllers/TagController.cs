@@ -55,7 +55,7 @@ namespace API.Controllers
       };
       if (originalTag == null) return NotFound(response);
 
-      tag.TagId = id;
+      tag.Id = id;
       var changedTag = _mapper.Map(tag, originalTag);
       _unitOfWork.TagRepository.UpdateTag(changedTag);
 
