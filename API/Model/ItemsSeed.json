@@ -4,8 +4,8 @@
     "ManufacturingDate": "2019-03-12",
     "ExpiryDate": "2020-05-28",
     "GuaranteePeriod": 3,
-    "Tag": { "TagName": "保養品" },
-    "Location": { "LocationName": "廚房" },
+    "Tag": { "Name": "保養品" },
+    "Location": { "Name": "廚房" },
     "PhotoUrl": "https://randomuser.me/api/portraits/men/9.jpg"
   },
   {
@@ -13,8 +13,8 @@
     "ManufacturingDate": "2019-01-17",
     "ExpiryDate": "2020-05-16",
     "GuaranteePeriod": 2,
-    "Tag": { "TagName": "餅乾" },
-    "Location": { "LocationName": "客廳" },
+    "Tag": { "Name": "餅乾" },
+    "Location": { "Name": "客廳" },
     "PhotoUrl": "https://randomuser.me/api/portraits/men/51.jpg"
   },
   {
@@ -22,8 +22,8 @@
     "ManufacturingDate": "2019-06-15",
     "ExpiryDate": "2020-06-01",
     "GuaranteePeriod": 1,
-    "Tag": { "TagName": "水果" },
-    "Location": { "LocationName": "房間" },
+    "Tag": { "Name": "水果" },
+    "Location": { "Name": "房間" },
     "PhotoUrl": "https://randomuser.me/api/portraits/men/76.jpg"
   },
   {
@@ -31,8 +31,8 @@
     "ManufacturingDate": "2019-03-20",
     "ExpiryDate": "2020-06-26",
     "GuaranteePeriod": 15,
-    "Tag": { "TagName": "蔬菜" },
-    "Location": { "LocationName": "浴室" },
+    "Tag": { "Name": "蔬菜" },
+    "Location": { "Name": "浴室" },
     "PhotoUrl": "https://randomuser.me/api/portraits/men/1.jpg"
   },
   {
@@ -40,8 +40,8 @@
     "ManufacturingDate": "2019-04-25",
     "ExpiryDate": "2020-05-29",
     "GuaranteePeriod": 20,
-    "Tag": { "TagName": "肉品" },
-    "Location": { "LocationName": "冰箱" },
+    "Tag": { "Name": "肉品" },
+    "Location": { "Name": "冰箱" },
     "PhotoUrl": "https://randomuser.me/api/portraits/men/17.jpg"
   }
 ]

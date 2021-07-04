@@ -15,9 +15,9 @@
           ><span class="fw-medium">到期日：</span
           >{{ item.expiryDate | date: 'YYYY 年 MM 月 dd 日' }}</span
         >
-        <span> <span class="fw-medium">類別：</span>{{ item.tag }}</span>
+        <span> <span class="fw-medium">類別：</span>{{ item.tag.name }}</span>
         <span>
-          <span class="fw-medium">放置場所：</span>{{ item.location }}</span
+          <span class="fw-medium">放置場所：</span>{{ item.location.name }}</span
         >
       </p>
     </div>

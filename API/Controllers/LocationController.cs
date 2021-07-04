@@ -49,7 +49,7 @@ namespace API.Controllers
         if (oringinLocation == null) return NotFound(response);
 
         location.Id = id;
-        var changedLocation = _mapper.Map<Location>(oringinLocation);
+        var changedLocation = _mapper.Map(location, oringinLocation);
         _unitOfWork.LocationRepository.UpdateLocation(changedLocation);
 
         if(await _unitOfWork.Complete()) return Ok();

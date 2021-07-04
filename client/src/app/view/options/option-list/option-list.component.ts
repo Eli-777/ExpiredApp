@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Tag } from 'src/app/interfaces/tag';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { ItemOption } from 'src/app/interfaces/itemOption';
+
 
 @Component({
   selector: 'app-option-list',
@@ -7,7 +8,9 @@ import { Tag } from 'src/app/interfaces/tag';
   styleUrls: ['./option-list.component.scss']
 })
 export class OptionListComponent implements OnInit {
-  @Input() list: Tag = {tagName: '保養品', isEdit: false}
+  @Input() list!: ItemOption
+  @Output() deleteId = new EventEmitter<number>()
+  @Output() changeName = new EventEmitter<ItemOption>()
   @ViewChild('listInput') listInput!: ElementRef
 
   constructor() { }
@@ -23,10 +26,16 @@ export class OptionListComponent implements OnInit {
 
   onBlur() {
     this.list.isEdit = false
+    this.changeName.emit(this.list)
   }
 
   onEnter() {
     this.list.isEdit = false
+    this.changeName.emit(this.list)
+  }
+
+  onDelete(id: number) {
+    this.deleteId.emit(id)
   }
 
 }

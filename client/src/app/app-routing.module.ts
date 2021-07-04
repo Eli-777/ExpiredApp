@@ -29,8 +29,8 @@ const routes: Routes = [
     path: 'options',
     component: OptionsComponent,
     children: [
-      { path: 'tags', component: OptionListsComponent },
-      { path: 'positions', component: OptionListsComponent },
+      { path: 'tag', component: OptionListsComponent },
+      { path: 'location', component: OptionListsComponent },
     ],
   },
   { path: 'login', component: LoginComponent },

@@ -4,5 +4,10 @@
 </div>
 
 <ul class="options-section mt-4">
-  <app-option-list *ngFor="let list of lists" [list]="list"></app-option-list>
+  <app-option-list
+    *ngFor="let list of lists$ | async"
+    [list]="list"
+    (deleteId)="onDelete($event)"
+    (changeName)="onChangeName($event)"
+  ></app-option-list>
 </ul>
