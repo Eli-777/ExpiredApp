@@ -34,15 +34,16 @@ namespace API.Model
 
     public async Task<Item> GetItem(int id)
     {
-      return await _context.Items.FindAsync(id);
+      var query = _context.Items.AsQueryable();
+      query = query.Include(i => i.Tag);
+      query = query.Include(i => i.Location);
+      return await query.FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<IEnumerable<ItemDto>> GetItems(ItemParams itemParams)
     {
       var query = _context.Items.AsQueryable();
       var today = DateTime.UtcNow;
-
-      query = query.Include(i => i.Tag);
       
       if (itemParams.IsExpired)
       {

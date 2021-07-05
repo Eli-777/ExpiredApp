@@ -19,6 +19,7 @@
           formControlName="itemName"
           required
         />
+        <mat-error *ngIf="itemForm.controls.itemName.hasError('required')">請填寫物品名稱</mat-error>
       </mat-form-field>
     </div>
 
@@ -51,16 +52,18 @@
           [for]="picker2"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2 touchUi="true"></mat-datepicker>
+        <mat-error *ngIf="itemForm.controls.expiryDate?.hasError('matDatepickerMin')">到期日不行小於製造日期</mat-error>
       </mat-form-field>
     </div>
 
     <div class="input-group m-2">
       <label for="guaranteePeriod"  class="fz-body">有效期限</label>
       <mat-form-field appearance="fill">
+        <mat-label>天數</mat-label>
         <input
           matInput
           id="guaranteePeriod"
-          type="text"
+          type="number"
           formControlName="guaranteePeriod"
         />
       </mat-form-field>
@@ -69,13 +72,30 @@
     <div class="input-group m-2">
       <label for="tag"  class="fz-body">類別</label>
       <mat-form-field appearance="fill">
-        <input matInput id="tag" type="text" formControlName="tag" />
+        <mat-label>-- 請選擇類別--</mat-label>
+        <mat-select formControlName="tag">
+          <mat-option disabled>-- 請選擇類別--</mat-option>
+          <mat-option routerLink="/options/tag">新增類別</mat-option>
+          <mat-option *ngFor="let tag of (tagOptions$ | async)" [value]="tag.name">
+            {{tag.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="itemForm.controls.tag.hasError('required')">請選擇一個類別</mat-error>
       </mat-form-field>
     </div>
+
     <div class="input-group m-2">
       <label for="location"  class="fz-body">所在位置</label>
       <mat-form-field appearance="fill">
-        <input matInput id="location" type="text" formControlName="location" />
+        <mat-label>-- 請選擇該物品放置位置--</mat-label>
+        <mat-select formControlName="location">
+          <mat-option disabled>-- 請選擇該物品放置位置--</mat-option>
+          <mat-option routerLink="/options/location">新增位置</mat-option>
+          <mat-option *ngFor="let location of (locationOptions$ | async)" [value]="location.name">
+            {{location.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="itemForm.controls.location.hasError('required')">請選擇一個類別</mat-error>
       </mat-form-field>
     </div>
 

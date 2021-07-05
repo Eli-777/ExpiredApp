@@ -6,6 +6,9 @@ import { take } from 'rxjs/operators';
 import { ItemService } from './../../../_services/item.service';
 import { Item } from './../../../interfaces/items';
 import * as moment from 'moment';
+import { ItemOption } from 'src/app/interfaces/itemOption';
+import { Observable } from 'rxjs';
+import { OptionService } from 'src/app/_services/option.service';
 
 @Component({
   selector: 'app-item',
@@ -16,11 +19,13 @@ export class ItemComponent implements OnInit {
   item?: Item;
   itemForm!: FormGroup;
   itemId = this.route.snapshot.paramMap.get('id');
-
+  tagOptions$!: Observable<ItemOption[]>;
+  locationOptions$!: Observable<ItemOption[]>;
 
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
+    private optionService: OptionService,
     private router: Router,
     private location: Location,
     private fb: FormBuilder
@@ -32,19 +37,22 @@ export class ItemComponent implements OnInit {
       manufacturingDate: [],
       expiryDate: [],
       guaranteePeriod: [],
-      tag: [],
+      tag: [null, Validators.required],
       location: [],
     });
     this.getItem();
+    this.tagOptions$ = this.optionService.getOptions('tag');
+    this.locationOptions$ = this.optionService.getOptions('location');
   }
-
 
   getItem() {
     if (this.itemId) {
       this.itemService.getItem(+this.itemId).subscribe(() => {
         this.item = this.itemService.item;
+
         if (this.item) {
-          this.itemForm.reset(this.item);
+          const formValue = this.changeItemFormValueToInput();
+          this.itemForm.reset(formValue);
         }
       });
     }
@@ -66,7 +74,8 @@ export class ItemComponent implements OnInit {
   }
 
   notChange() {
-    this.itemForm.reset(this.item);
+    const formValue = this.changeItemFormValueToInput();
+    this.itemForm.reset(formValue);
     this.location.back();
   }
 
@@ -84,4 +93,15 @@ export class ItemComponent implements OnInit {
   expiryMinDate() {
     return moment(new Date(this.itemForm.value.manufacturingDate));
   }
+
+  changeItemFormValueToInput() {
+    if (this.item) {
+      const formValue: any = {};
+      Object.assign(formValue, this.item);
+      formValue.tag = this.item.tag.name;
+      formValue.location = this.item.location.name;
+      return formValue;
+    }
+  }
+
 }
