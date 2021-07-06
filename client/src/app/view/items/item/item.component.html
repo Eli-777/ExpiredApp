@@ -66,6 +66,8 @@
           type="number"
           formControlName="guaranteePeriod"
         />
+        <mat-error *ngIf="itemForm.controls.guaranteePeriod.hasError('required')">有效天數不可為空
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -76,7 +78,7 @@
         <mat-select formControlName="tag">
           <mat-option disabled>-- 請選擇類別--</mat-option>
           <mat-option routerLink="/options/tag">新增類別</mat-option>
-          <mat-option *ngFor="let tag of (tagOptions$ | async)" [value]="tag.name">
+          <mat-option *ngFor="let tag of (tagOptions$ | async)" [value]="tag.id">
             {{tag.name}}
           </mat-option>
         </mat-select>
@@ -91,11 +93,11 @@
         <mat-select formControlName="location">
           <mat-option disabled>-- 請選擇該物品放置位置--</mat-option>
           <mat-option routerLink="/options/location">新增位置</mat-option>
-          <mat-option *ngFor="let location of (locationOptions$ | async)" [value]="location.name">
+          <mat-option *ngFor="let location of (locationOptions$ | async)" [value]="location.id">
             {{location.name}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="itemForm.controls.location.hasError('required')">請選擇一個類別</mat-error>
+        <mat-error *ngIf="itemForm.controls.location.hasError('required')">請選擇一個位置</mat-error>
       </mat-form-field>
     </div>
 
