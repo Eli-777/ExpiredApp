@@ -12,6 +12,7 @@ namespace API.Entities
         public Tag Tag { get; set; }
         public Location Location { get; set; }
         public string PhotoUrl { get; set; }
+        public string PhotoPublicId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
     }

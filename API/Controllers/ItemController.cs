@@ -14,9 +14,11 @@ namespace API.Controllers
   {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IPhotoService _photoService;
 
-    public ItemController(IUnitOfWork unitOfWork, IMapper mapper)
+    public ItemController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
     {
+      _photoService = photoService;
       _mapper = mapper;
       _unitOfWork = unitOfWork;
     }
@@ -50,14 +52,33 @@ namespace API.Controllers
     public async Task<ActionResult<ItemDto>> AddItem(NewItem item)
     {
       var response = new ErrorResponse { };
-      var addItem = new Item{
+
+      //photo upload
+      string url = "";
+      string publicId = "";
+      if (item.PhotoFile != null)
+      {
+        var uploadResult = await _photoService.AddPhotoAsync(item.PhotoFile);
+        if (uploadResult.Error != null)
+        {
+          response.message = uploadResult.Error.Message;
+          return BadRequest(response);
+        }
+        url = uploadResult.SecureUrl.AbsoluteUri;
+        publicId = uploadResult.PublicId;
+      }
+
+
+      var addItem = new Item
+      {
         ItemName = item.ItemName,
         ManufacturingDate = item.ManufacturingDate,
         ExpiryDate = item.ExpiryDate,
         GuaranteePeriod = item.GuaranteePeriod,
-        PhotoUrl = item.PhotoUrl
+        PhotoUrl = url,
+        PhotoPublicId = publicId
       };
-      
+
       if (item.Tag > 0)
       {
         var tagIid = item.Tag;
@@ -76,7 +97,7 @@ namespace API.Controllers
         if (selectLocation == null) return NotFound(response);
         addItem.Location = selectLocation;
       }
-   
+
 
       _unitOfWork.ItemRepository.AddItem(addItem);
 
@@ -95,16 +116,28 @@ namespace API.Controllers
     public async Task<ActionResult> DeleteItem(int id)
     {
       var item = await _unitOfWork.ItemRepository.GetItem(id);
-      if (item == null) return BadRequest("item is not exist");
+      var response = new ErrorResponse
+      {
+        message = "item is not exist"
+      };
+      if (item == null) return BadRequest(response);
+
+      //old photo delete
+      if (item.PhotoPublicId != null)
+      {
+        var deleteResult = await _photoService.DeletePhotoAsync(item.PhotoPublicId);
+        if (deleteResult.Error != null)
+        {
+          response.message = deleteResult.Error.Message;
+          return BadRequest(response);
+        }
+      }
 
       _unitOfWork.ItemRepository.DeleteItem(item);
-      var response = new
-      {
-        message = $"the item with id = {id}  is delete"
-      };
+      response.message = $"the item with id = {id}  is delete";
       if (await _unitOfWork.Complete()) return Ok(response);
-
-      return BadRequest("Problem deleting the item");
+      response.message = "Problem deleting the item";
+      return BadRequest(response);
     }
 
     [HttpPut("{id}")]
@@ -126,6 +159,29 @@ namespace API.Controllers
       if (newTag == null) return NotFound(response);
       response.message = "new select Location is not Found";
       if (newLocation == null) return NotFound(response);
+
+      //old photo delete
+      if (originalItem.PhotoPublicId != null)
+      {
+        var deleteResult = await _photoService.DeletePhotoAsync(originalItem.PhotoPublicId);
+        if (deleteResult.Error != null)
+        {
+          response.message = deleteResult.Error.Message;
+          return BadRequest(response);
+        }
+      }
+      //new photo upload
+      if (item.PhotoFile != null)
+      {
+        var uploadResult = await _photoService.AddPhotoAsync(item.PhotoFile);
+        if (uploadResult.Error != null)
+        {
+          response.message = uploadResult.Error.Message;
+          return BadRequest(response);
+        }
+        originalItem.PhotoUrl = uploadResult.SecureUrl.AbsoluteUri;
+        originalItem.PhotoPublicId = uploadResult.PublicId;
+      }
 
       originalItem.Tag = newTag;
       originalItem.Location = newLocation;

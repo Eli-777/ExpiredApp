@@ -1,9 +1,9 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Helpers
 {
-    public class NewItem
+  public class NewItem
     {
         public string ItemName { get; set; }
         public Nullable<DateTime> ManufacturingDate { get; set; }
@@ -12,5 +12,7 @@ namespace API.Helpers
         public int Tag { get; set; }
         public int Location { get; set; }
         public string PhotoUrl { get; set; }
+
+        public string PhotoFile { get; set; }
     }
 }

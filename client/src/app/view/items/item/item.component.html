@@ -101,6 +101,9 @@
       </mat-form-field>
     </div>
 
+
+    <input type="file"  accept="image/*" (change)="onFileChanged($event)">
+
     <div class="button-wrapper mt-3">
       <app-button
         *ngIf="itemId"

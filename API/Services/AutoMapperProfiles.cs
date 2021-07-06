@@ -8,7 +8,8 @@ namespace API.Services
   {
     public AutoMapperProfiles()
     {
-        CreateMap<ItemDto, Item>();
+        CreateMap<ItemDto, Item>()
+          .ForMember(d => d.PhotoUrl, o => o.Condition(o => o.PhotoUrl == null));
         CreateMap<Item, ItemDto>();
         CreateMap<TagDto, Tag>();
         CreateMap<Tag, TagDto>();

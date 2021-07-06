@@ -45,6 +45,7 @@ export class ItemComponent implements OnInit {
       guaranteePeriod: [null, Validators.required],
       tag: [null, Validators.required],
       location: [null, Validators.required],
+      photoFile: [],
     });
     this.getItem();
     this.tagOptions$ = this.optionService
@@ -186,6 +187,21 @@ export class ItemComponent implements OnInit {
       const days = Math.round(guaranteePeriodMillisecond / 1000 / 60 / 60 / 24);
 
       this.itemForm.patchValue({ guaranteePeriod: days }, { emitEvent: false });
+    }
+  }
+
+  onFileChanged(event: any) {
+    const reader = new FileReader();
+    if(event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+
+      reader.onload = (e) => {
+        this.itemForm.patchValue({
+          photoFile:  e.target!.result
+        }, { emitEvent: false });
+
+      };
     }
   }
 }

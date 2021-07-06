@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Dtos
 {
@@ -14,5 +15,6 @@ namespace API.Dtos
         public TagDto Tag { get; set; }
         public LocationDto Location { get; set; }
         public string PhotoUrl { get; set; }
+        public string PhotoFile { get; set; }
     }
 }
