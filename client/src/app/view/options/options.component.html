@@ -1,10 +1,20 @@
 <div class="container form-center-wrapper pb-4">
   <h1 class="fz-title m-4">管理選項</h1>
   <ul class="tap-group mb-3">
-    <li class="tap-button fz-body"><a routerLink="/options/tag" routerLinkActive="active">類別</a></li>
-    <li class="tap-button fz-body"><a routerLink="/options/location" routerLinkActive="active">位置</a></li>
-    <div class="tap-bar" routerLink="/options/location" routerLinkActive="position"></div>
+    <li class="tap-button fz-body">
+      <a routerLink="/options/tag" routerLinkActive="active">類別</a>
+    </li>
+    <li class="tap-button fz-body">
+      <a routerLink="/options/location" routerLinkActive="active">位置</a>
+    </li>
+    <div
+      class="tap-bar"
+      routerLink="/options/location"
+      routerLinkActive="position"
+    ></div>
   </ul>
 
-  <router-outlet></router-outlet>
+  <div class="lists">
+    <router-outlet></router-outlet>
+  </div>
 </div>

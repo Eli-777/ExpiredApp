@@ -17,9 +17,12 @@ export class CardComponent implements OnInit {
   }
 
   deleteItem( event: any ,id: number) {
-    event.cancelBubble = true
-    event.preventDefault()
-    this.itemService.deleteItem(id).pipe(take(1)).subscribe()
+    if (!this.itemService.isLoading) {
+      this.itemService.isLoading = true
+      event.cancelBubble = true
+      event.preventDefault()
+      this.itemService.deleteItem(id).pipe(take(1)).subscribe()
+    }
   }
 
 }

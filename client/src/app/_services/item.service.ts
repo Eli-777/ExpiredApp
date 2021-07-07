@@ -174,6 +174,7 @@ export class ItemService {
           const deletedItems = items.filter((item) => item.id !== id);
           this.expiringItems$.next(deletedItems);
         });
+        this.isLoading = false
       })
     );
   }

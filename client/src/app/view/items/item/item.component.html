@@ -1,13 +1,30 @@
 <div class="container form-center-wrapper pb-4">
-  <h1 class="fz-title m-4">{{itemId ? "編輯物品" : "新增物品"}}</h1>
+  <h1 class="fz-title m-4">{{ itemId ? "編輯物品" : "新增物品" }}</h1>
   <form [formGroup]="itemForm">
-    <img
-      class="form-img"
-      src="{{
-        item?.photoUrl || '../../../../../../assets/image-not-found.svg'
-      }}"
-      alt="item image"
-    />
+    <div class="form-imgUpload mb-4 ml-auto mr-auto">
+      <img
+        class="form-imgUpload-img"
+        src="{{
+          item?.photoUrl || '../../../../../../assets/image-not-found.svg'
+        }}"
+        [src]="previewImageURL"
+        alt="item image"
+      />
+      <p class="form-imgUpload-text fz-title fw-bold">
+        點擊方框選擇照片<br />
+        或是 <br />拖曳照片至方框中
+      </p>
+      <div class="form-imgUpload-background" [class.drop]="isDropping"></div>
+      <input
+        type="file"
+        class="form-imgUpload-input fz-title"
+        accept="image/*"
+        (change)="onFileInputChanged($event)"
+        (drop)="onFileInputChanged($event)"
+        (dragenter)="onDropEnter()"
+        (dragleave)="onDropLeave()"
+      />
+    </div>
 
     <div class="input-group m-2">
       <label for="name" class="fz-body">物品名稱</label>
@@ -19,12 +36,14 @@
           formControlName="itemName"
           required
         />
-        <mat-error *ngIf="itemForm.controls.itemName.hasError('required')">請填寫物品名稱</mat-error>
+        <mat-error *ngIf="itemForm.controls.itemName.hasError('required')"
+          >請填寫物品名稱</mat-error
+        >
       </mat-form-field>
     </div>
 
     <div class="input-group m-2">
-      <label for="manufacturingDate"  class="fz-body">製造日期</label>
+      <label for="manufacturingDate" class="fz-body">製造日期</label>
       <mat-form-field appearance="fill">
         <input
           matInput
@@ -38,7 +57,7 @@
     </div>
 
     <div class="input-group m-2">
-      <label for="expiryDate"  class="fz-body">到期日期</label>
+      <label for="expiryDate" class="fz-body">到期日期</label>
       <mat-form-field appearance="fill">
         <input
           matInput
@@ -52,12 +71,15 @@
           [for]="picker2"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2 touchUi="true"></mat-datepicker>
-        <mat-error *ngIf="itemForm.controls.expiryDate?.hasError('matDatepickerMin')">到期日不行小於製造日期</mat-error>
+        <mat-error
+          *ngIf="itemForm.controls.expiryDate?.hasError('matDatepickerMin')"
+          >到期日不行小於製造日期</mat-error
+        >
       </mat-form-field>
     </div>
 
     <div class="input-group m-2">
-      <label for="guaranteePeriod"  class="fz-body">有效期限</label>
+      <label for="guaranteePeriod" class="fz-body">有效期限</label>
       <mat-form-field appearance="fill">
         <mat-label>天數</mat-label>
         <input
@@ -66,43 +88,49 @@
           type="number"
           formControlName="guaranteePeriod"
         />
-        <mat-error *ngIf="itemForm.controls.guaranteePeriod.hasError('required')">有效天數不可為空
+        <mat-error
+          *ngIf="itemForm.controls.guaranteePeriod.hasError('required')"
+          >有效天數不可為空
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="input-group m-2">
-      <label for="tag"  class="fz-body">類別</label>
+      <label for="tag" class="fz-body">類別</label>
       <mat-form-field appearance="fill">
         <mat-label>-- 請選擇類別--</mat-label>
         <mat-select formControlName="tag">
           <mat-option disabled>-- 請選擇類別--</mat-option>
           <mat-option routerLink="/options/tag">新增類別</mat-option>
-          <mat-option *ngFor="let tag of (tagOptions$ | async)" [value]="tag.id">
-            {{tag.name}}
+          <mat-option *ngFor="let tag of tagOptions$ | async" [value]="tag.id">
+            {{ tag.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="itemForm.controls.tag.hasError('required')">請選擇一個類別</mat-error>
+        <mat-error *ngIf="itemForm.controls.tag.hasError('required')"
+          >請選擇一個類別</mat-error
+        >
       </mat-form-field>
     </div>
 
     <div class="input-group m-2">
-      <label for="location"  class="fz-body">所在位置</label>
+      <label for="location" class="fz-body">所在位置</label>
       <mat-form-field appearance="fill">
         <mat-label>-- 請選擇該物品放置位置--</mat-label>
         <mat-select formControlName="location">
           <mat-option disabled>-- 請選擇該物品放置位置--</mat-option>
           <mat-option routerLink="/options/location">新增位置</mat-option>
-          <mat-option *ngFor="let location of (locationOptions$ | async)" [value]="location.id">
-            {{location.name}}
+          <mat-option
+            *ngFor="let location of locationOptions$ | async"
+            [value]="location.id"
+          >
+            {{ location.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="itemForm.controls.location.hasError('required')">請選擇一個位置</mat-error>
+        <mat-error *ngIf="itemForm.controls.location.hasError('required')"
+          >請選擇一個位置</mat-error
+        >
       </mat-form-field>
     </div>
-
-
-    <input type="file"  accept="image/*" (change)="onFileChanged($event)">
 
     <div class="button-wrapper mt-3">
       <app-button
@@ -110,12 +138,14 @@
         [buttonName]="'修改'"
         btnClass="btn-add"
         (click)="editItem()"
+        [disabled]="itemService.isLoading"
       ></app-button>
       <app-button
         *ngIf="!itemId"
         [buttonName]="'新增'"
         btnClass="btn-add"
         (click)="addItem()"
+        [disabled]="itemService.isLoading"
       ></app-button>
       <app-button
         [buttonName]="'取消'"
@@ -127,6 +157,7 @@
         [buttonName]="'刪除'"
         btnClass="btn-error"
         (click)="deleteItem()"
+        [disabled]="itemService.isLoading"
       ></app-button>
     </div>
   </form>

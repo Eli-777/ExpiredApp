@@ -2,4 +2,12 @@
   <i class="fa fa-trash fz-button"></i>
 </button>
 
-<button class="btn fz-body" [type]="type"   [class]="btnClass" *ngIf="buttonName !== 'delete'">{{ buttonName }}</button>
+<button
+  class="btn fz-body"
+  [type]="type"
+  [class]="btnClass"
+  *ngIf="buttonName !== 'delete'"
+  [disabled]="disabled"
+>
+  {{ buttonName }}
+</button>

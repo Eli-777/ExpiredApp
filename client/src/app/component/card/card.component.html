@@ -1,25 +1,33 @@
 <div class="card p-2">
-  <a routerLink="/items/{{ item.id }}">
-    <div class="card-border p-2">
-      <div class="card-img-wrapper">
-        <img
-          class="card-img"
-          src="{{ item.photoUrl || ' ../../../assets/image-not-found.svg' }}"
-          alt="item image"
-        />
-        <app-button class="delete-icon"  [buttonName]="'delete'" (click)="deleteItem($event,item.id)" [hidden]="itemService.isLoading" ></app-button>
-      </div>
-      <h2 class="fz-body fw-medium card-title">{{ item.itemName }}</h2>
-      <p class="fz-caption card-body">
-        <span
-          ><span class="fw-medium">到期日：</span
-          >{{ item.expiryDate | date: 'YYYY 年 MM 月 dd 日' }}</span
-        >
-        <span> <span class="fw-medium">類別：</span>{{ item.tag.name }}</span>
-        <span>
-          <span class="fw-medium">放置場所：</span>{{ item.location?.name }}</span
-        >
-      </p>
+  <div class="card-border p-2">
+    <ng-container *ngIf="!this.itemService.isLoading">
+      <a class="card-link" routerLink="/items/{{ item.id }}"> </a>
+    </ng-container>
+    <div class="card-img-wrapper">
+      <img
+        class="card-img"
+        src="{{ item.photoUrl || ' ../../../assets/image-not-found.svg' }}"
+        alt="item image"
+      />
+      <app-button
+        class="delete-icon"
+        [buttonName]="'delete'"
+        (click)="deleteItem($event, item.id)"
+        [hidden]="itemService.isLoading"
+      ></app-button>
     </div>
-  </a>
+    <h2 class="fz-body fw-medium card-title">{{ item.itemName }}</h2>
+    <p class="fz-caption card-body">
+      <span class="card-text"
+        ><span class="fw-medium">到期日：</span
+        >{{ item.expiryDate | date: "YYYY 年 MM 月 dd 日" }}</span
+      >
+      <span class="card-text">
+        <span class="fw-medium">類別：</span>{{ item.tag.name }}</span
+      >
+      <span class="card-text">
+        <span class="fw-medium">放置場所：</span>{{ item.location?.name }}</span
+      >
+    </p>
+  </div>
 </div>

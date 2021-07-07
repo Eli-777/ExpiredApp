@@ -23,6 +23,8 @@ export class ItemComponent implements OnInit {
   locationOptions$!: Observable<ItemOption[]>;
   tags: ItemOption[] = [];
   locations: ItemOption[] = [];
+  previewImageURL: any = '../../../../assets/transparent-img.png';
+  isDropping: boolean = false;
 
   manufacturingDate: any = null;
   expiryDate: any = null;
@@ -30,7 +32,7 @@ export class ItemComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private itemService: ItemService,
+    public itemService: ItemService,
     private optionService: OptionService,
     private router: Router,
     private location: Location,
@@ -72,31 +74,54 @@ export class ItemComponent implements OnInit {
   }
 
   addItem() {
-    const inputRawValue = this.itemForm.getRawValue();
-
-    this.itemService
-      .addItem(inputRawValue)
-      .pipe(take(1))
-      .subscribe(() => this.router.navigate(['/items']));
+    if (!this.itemService.isLoading) {
+      this.itemService.isLoading = true;
+      const inputRawValue = this.itemForm.getRawValue();
+  
+      this.itemService
+        .addItem(inputRawValue)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.router.navigate(['/items']);
+          this.itemService.isLoading = false;
+        });
+    }
   }
 
   editItem() {
-    const inputRawValue = this.itemForm.getRawValue();
-    const newTagSelect = this.tags.find(
-      (tag) => tag.id === this.itemForm.value.tag
-    );
-    const newLocationSelect = this.locations.find(
-      (location) => location.id === this.itemForm.value.location
-    );
+    if (!this.itemService.isLoading) {
+      this.itemService.isLoading = true;
+      const isUpdateImg = this.itemForm.controls.photoFile.value
+      
+      const inputRawValue = this.itemForm.getRawValue();
+      const newTagSelect = this.tags.find(
+        (tag) => tag.id === this.itemForm.value.tag
+      );
+      const newLocationSelect = this.locations.find(
+        (location) => location.id === this.itemForm.value.location
+      );
+  
+      const editedItem = { ...this.item, ...inputRawValue };
+      editedItem.tag = newTagSelect;
+      editedItem.location = newLocationSelect;
+  
+      this.itemService
+        .editItem(+this.itemId!, editedItem)
+        .pipe(take(1))
+        .subscribe(() => {
+          if (isUpdateImg) {
+            this.clearCache()
+          }
+          this.location.back();
+          this.itemService.isLoading = false;
+        });
+    }
+  }
 
-    const editedItem = { ...this.item, ...inputRawValue };
-    editedItem.tag = newTagSelect;
-    editedItem.location = newLocationSelect;
-
-    this.itemService
-      .editItem(+this.itemId!, editedItem)
-      .pipe(take(1))
-      .subscribe(() => this.location.back());
+  clearCache() {
+    this.itemService.items$.next([])
+    this.itemService.expiringItems$.next([])
+    this.itemService.expiredItems$.next([])
   }
 
   notChange() {
@@ -106,12 +131,14 @@ export class ItemComponent implements OnInit {
   }
 
   deleteItem() {
-    if (this.itemId) {
+    if (this.itemId && !this.itemService.isLoading) {
+      this.itemService.isLoading = true;
       this.itemService
         .deleteItem(+this.itemId)
         .pipe(take(1))
         .subscribe(() => {
           this.location.back();
+          this.itemService.isLoading = false;
         });
     }
   }
@@ -190,18 +217,37 @@ export class ItemComponent implements OnInit {
     }
   }
 
-  onFileChanged(event: any) {
-    const reader = new FileReader();
-    if(event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
+  onFileInputChanged(event: any) {
+    this.isDropping = true;
+
+    if (
+      (event.target.files && event.target.files.length) ||
+      event.dataTransfer.files.length
+    ) {
+      const reader = new FileReader();
+      const file = event?.dataTransfer?.files
+        ? event.dataTransfer.files[0]
+        : event.target.files[0];
+
       reader.readAsDataURL(file);
 
       reader.onload = (e) => {
-        this.itemForm.patchValue({
-          photoFile:  e.target!.result
-        }, { emitEvent: false });
-
+        this.previewImageURL = e.target!.result;
+        this.itemForm.patchValue(
+          {
+            photoFile: e.target!.result,
+          },
+          { emitEvent: false }
+        );
+        this.isDropping = false;
       };
     }
+  }
+
+  onDropEnter() {
+    this.isDropping = true;
+  }
+  onDropLeave() {
+    this.isDropping = false;
   }
 }

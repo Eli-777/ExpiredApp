@@ -161,7 +161,7 @@ namespace API.Controllers
       if (newLocation == null) return NotFound(response);
 
       //old photo delete
-      if (originalItem.PhotoPublicId != null)
+      if (originalItem.PhotoPublicId != null && item.PhotoFile != null)
       {
         var deleteResult = await _photoService.DeletePhotoAsync(originalItem.PhotoPublicId);
         if (deleteResult.Error != null)

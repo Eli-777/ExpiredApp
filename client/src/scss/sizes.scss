@@ -1,1 +1,10 @@
 $sizes: ("8px", "16px", "32px", "64px", "128px");
+
+%wordNotOverflow {
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}

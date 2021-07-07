@@ -15,6 +15,14 @@
     }
   }
 
+  &-name {
+    @extend %wordNotOverflow;
+
+    &.isEdit {
+      opacity: 0;
+    }
+  }
+
   &-input {
     line-height: 2rem;
     background-color: rgba(0, 0, 0, 0.04);

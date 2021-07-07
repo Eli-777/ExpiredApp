@@ -1,7 +1,12 @@
 <li class="mb-3" (dblclick)="onDoubleClick($event)">
   <div class="options-list fz-body">
-    <span>{{ list.name }}</span>
-    <i class="fa fa-times-circle fz-h5 deleteIcon" (click)="onDelete(list.id)"></i>
+    <span class="options-name" [class.isEdit]="list.isEdit">{{
+      list.name
+    }}</span>
+    <i
+      class="fa fa-times-circle fz-h5 deleteIcon"
+      (click)="onDelete(list.id)"
+    ></i>
     <input
       #listInput
       (blur)="onBlur()"
