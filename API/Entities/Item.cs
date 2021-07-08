@@ -14,6 +14,7 @@ namespace API.Entities
         public string PhotoUrl { get; set; }
         public string PhotoPublicId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public AppUser AppUser { get; set; }
 
     }
 }
