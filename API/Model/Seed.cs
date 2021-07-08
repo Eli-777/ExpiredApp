@@ -42,7 +42,7 @@ namespace API.Model
 
         user.UserName = user.UserName.ToLower();
 
-        await userManager.CreateAsync(user, "Test123456");
+        await userManager.CreateAsync(user, "Test1234");
         //種子資料每個都加入 Member 角色
         await userManager.AddToRoleAsync(user, "Member");
 
@@ -51,6 +51,7 @@ namespace API.Model
       //建立 admin 帳戶
       var admin = new AppUser
       {
+        Email = "admin",
         UserName = "admin"
       };
 

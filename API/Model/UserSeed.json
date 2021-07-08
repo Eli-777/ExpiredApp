@@ -1,6 +1,7 @@
 [
   {
     "UserName": "test1",
+    "Email": "test1@test.com",
     "Items": [
       {
         "ItemName": "Farrell",
@@ -75,6 +76,7 @@
   },
   {
     "UserName": "test2",
+    "Email": "test2@test.com",
     "Items": [
       {
         "ItemName": "Farrell",
@@ -149,6 +151,7 @@
   },
   {
     "UserName": "test3",
+    "Email": "test3@test.com",
     "Items": [
       {
         "ItemName": "Farrell",
