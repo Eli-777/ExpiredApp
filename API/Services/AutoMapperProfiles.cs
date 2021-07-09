@@ -16,6 +16,8 @@ namespace API.Services
         CreateMap<LocationDto, Location>();
         CreateMap<Location, LocationDto>();
         CreateMap<RegisterDto, AppUser>();
+        CreateMap<SettingDto, Setting>();
+        CreateMap<Setting, SettingDto>();
     }
   }
 }

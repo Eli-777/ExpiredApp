@@ -18,6 +18,7 @@ namespace API.Model
     public DbSet<Item> Items { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Location> Locations { get; set; }
+    public DbSet<Setting> Settings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -37,7 +38,8 @@ namespace API.Model
       builder.Entity<AppUser>()
         .HasOne(ur => ur.Setting)
         .WithOne(s => s.AppUser)
-        .HasForeignKey<Setting>(s => s.id);
+        .HasForeignKey<Setting>(s => s.id)
+        .IsRequired();
         
     }
 

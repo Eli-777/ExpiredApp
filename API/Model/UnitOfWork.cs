@@ -20,6 +20,8 @@ namespace API.Model
 
     public IUserRepository UserRepository =>  new UserRepository(_context);
 
+    public ISettingRepository SettingRepository => new SettingRepository(_context);
+
     public async Task<bool> Complete()
     {
       return await _context.SaveChangesAsync() > 0;
