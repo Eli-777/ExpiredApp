@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
@@ -37,6 +38,15 @@ namespace API.Model
     public async Task<IEnumerable<LocationDto>> GetLocations()
     {
       return await _context.Locations
+        .ProjectTo<LocationDto>(_mapper.ConfigurationProvider)
+        .ToListAsync();
+    }
+
+    public async Task<IEnumerable<LocationDto>> GetLocationsForUser(int userId)
+    {
+      return await _context.Locations
+        .AsQueryable()
+        .Where(l => l.AppUser.Id == userId)
         .ProjectTo<LocationDto>(_mapper.ConfigurationProvider)
         .ToListAsync();
     }

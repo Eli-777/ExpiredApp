@@ -12,5 +12,6 @@ namespace API.Entities
         public string Name { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public ICollection<Item> Items { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

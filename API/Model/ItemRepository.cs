@@ -32,18 +32,21 @@ namespace API.Model
       _context.Items.Remove(item);
     }
 
-    public async Task<Item> GetItem(int id)
+    public async Task<Item> GetItem(int userId, int itemId)
     {
       var query = _context.Items.AsQueryable();
+      query = query.Where(i => i.AppUser.Id == userId);
       query = query.Include(i => i.Tag);
       query = query.Include(i => i.Location);
-      return await query.FirstOrDefaultAsync(i => i.Id == id);
+      return await query.FirstOrDefaultAsync(i => i.Id == itemId);
     }
 
-    public async Task<IEnumerable<ItemDto>> GetItems(ItemParams itemParams)
+    public async Task<IEnumerable<ItemDto>> GetItems(int userId, ItemParams itemParams)
     {
       var query = _context.Items.AsQueryable();
       var today = DateTime.UtcNow;
+
+      query = query.Where(i => i.AppUser.Id == userId);
       
       if (itemParams.IsExpired)
       {

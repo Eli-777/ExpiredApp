@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+  [Authorize]
   public class ItemController : baseController
   {
     private readonly IUnitOfWork _unitOfWork;
@@ -26,7 +29,8 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems([FromQuery] ItemParams itemParams)
     {
-      var items = await _unitOfWork.ItemRepository.GetItems(itemParams);
+      var userId = User.GetUserId();
+      var items = await _unitOfWork.ItemRepository.GetItems(userId, itemParams);
 
       return Ok(items);
 
@@ -35,7 +39,8 @@ namespace API.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<ItemDto>> GetItem(int id)
     {
-      var item = await _unitOfWork.ItemRepository.GetItem(id);
+      var userId = User.GetUserId();
+      var item = await _unitOfWork.ItemRepository.GetItem(userId, id);
       var response = new
       {
         message = "this item is not found"
@@ -52,6 +57,8 @@ namespace API.Controllers
     public async Task<ActionResult<ItemDto>> AddItem(NewItem item)
     {
       var response = new ErrorResponse { };
+      var userId = User.GetUserId();
+      var user = await _unitOfWork.UserRepository.GetUser(userId);
 
       //photo upload
       string url = "";
@@ -71,6 +78,7 @@ namespace API.Controllers
 
       var addItem = new Item
       {
+        AppUser = user,
         ItemName = item.ItemName,
         ManufacturingDate = item.ManufacturingDate,
         ExpiryDate = item.ExpiryDate,
@@ -115,7 +123,8 @@ namespace API.Controllers
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteItem(int id)
     {
-      var item = await _unitOfWork.ItemRepository.GetItem(id);
+      var userId = User.GetUserId();
+      var item = await _unitOfWork.ItemRepository.GetItem(userId, id);
       var response = new ErrorResponse
       {
         message = "item is not exist"
@@ -149,7 +158,8 @@ namespace API.Controllers
       };
       if (id != item.Id) return BadRequest(response);
 
-      var originalItem = await _unitOfWork.ItemRepository.GetItem(item.Id);
+      var userId = User.GetUserId();
+      var originalItem = await _unitOfWork.ItemRepository.GetItem(userId, item.Id);
       var newTag = await _unitOfWork.TagRepository.GetTag(item.Tag.Id);
       var newLocation = await _unitOfWork.LocationRepository.GetLocation(item.Location.Id);
 

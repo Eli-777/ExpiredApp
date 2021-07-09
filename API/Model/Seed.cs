@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using API.Entities;
@@ -41,6 +42,11 @@ namespace API.Model
       {
 
         user.UserName = user.UserName.ToLower();
+        foreach (var item in user.Items)
+        {
+            item.Tag = user.Tags.FirstOrDefault();
+            item.Location = user.Locations.FirstOrDefault();
+        }
 
         await userManager.CreateAsync(user, "Test1234");
         //種子資料每個都加入 Member 角色

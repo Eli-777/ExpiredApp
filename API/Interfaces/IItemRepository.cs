@@ -8,10 +8,10 @@ namespace API.Interfaces
 {
     public interface IItemRepository
     {
-        Task<IEnumerable<ItemDto>> GetItems(ItemParams itemParams);
+        Task<IEnumerable<ItemDto>> GetItems(int userId, ItemParams itemParams);
         void AddItem(Item item);
         void DeleteItem(Item item);
-        Task<Item> GetItem(int id);
+        Task<Item> GetItem(int userId, int itemId);
         void Update(Item item);
         Task<ItemDto> GetAddedItem();
 

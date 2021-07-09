@@ -8,6 +8,7 @@ namespace API.Interfaces
   public interface ILocationRepository
     {
         Task<IEnumerable<LocationDto>> GetLocations();
+        Task<IEnumerable<LocationDto>> GetLocationsForUser(int userId);
         Task<Location> GetLocation(int id);
 
         void AddLocation(Location location);

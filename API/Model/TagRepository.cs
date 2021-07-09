@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
@@ -37,6 +38,15 @@ namespace API.Model
     public async Task<IEnumerable<TagDto>> GetTags()
     {
       return await _context.Tags
+        .ProjectTo<TagDto>(_mapper.ConfigurationProvider)
+        .ToListAsync();
+    }
+
+    public async Task<IEnumerable<TagDto>> GetTagsForUser(int userId)
+    {
+      return await _context.Tags
+        .AsQueryable()
+        .Where(t => t.AppUser.Id == userId)
         .ProjectTo<TagDto>(_mapper.ConfigurationProvider)
         .ToListAsync();
     }

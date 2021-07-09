@@ -7,6 +7,7 @@ namespace API.Interfaces
         IItemRepository ItemRepository {get;}
         ITagRepository TagRepository {get;}
         ILocationRepository LocationRepository {get;}
+        IUserRepository UserRepository {get;}
         Task<bool> Complete();
         bool HasChanges();
     }

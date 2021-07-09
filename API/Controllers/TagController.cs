@@ -2,14 +2,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+  [Authorize]
   public class TagController : baseController
   {
     private readonly IUnitOfWork _unitOfWork;
@@ -24,7 +27,8 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TagDto>>> GetTags()
     {
-      var tags = await _unitOfWork.TagRepository.GetTags();
+      var userId = User.GetUserId();
+      var tags = await _unitOfWork.TagRepository.GetTagsForUser(userId);
 
       return Ok(tags);
     }
@@ -32,6 +36,9 @@ namespace API.Controllers
     [HttpPost]
     public async Task<ActionResult> AddTag(Tag tag)
     {
+      var userId = User.GetUserId();
+      var user = await _unitOfWork.UserRepository.GetUser(userId);
+      tag.AppUser = user;
       _unitOfWork.TagRepository.AddTag(tag);
 
       if (await _unitOfWork.Complete()) return Ok();

@@ -18,6 +18,8 @@ namespace API.Model
     public ITagRepository TagRepository => new TagRepository(_context, _mapper);
     public ILocationRepository LocationRepository => new LocationRepository(_context, _mapper);
 
+    public IUserRepository UserRepository =>  new UserRepository(_context);
+
     public async Task<bool> Complete()
     {
       return await _context.SaveChangesAsync() > 0;
