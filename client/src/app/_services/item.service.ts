@@ -178,4 +178,10 @@ export class ItemService {
       })
     );
   }
+
+  clearAllItems() {
+    this.items$.next([])
+    this.expiredItems$.next([])
+    this.expiringItems$.next([])
+  }
 }

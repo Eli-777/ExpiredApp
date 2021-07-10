@@ -1,10 +1,10 @@
+import { ItemService } from './item.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { Account } from './../interfaces/account';
 import { User } from '../interfaces/user';
-import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AccountService {
   currentUser = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUser.asObservable()
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private itemService: ItemService) {}
 
   login(accountParam: Account) {
     return this.http
@@ -46,6 +46,7 @@ export class AccountService {
   logout() {
     this.currentUser.next(undefined)
     localStorage.removeItem('user')
+    this.itemService.clearAllItems()
   }
 
 

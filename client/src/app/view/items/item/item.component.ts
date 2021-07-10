@@ -119,9 +119,7 @@ export class ItemComponent implements OnInit {
   }
 
   clearCache() {
-    this.itemService.items$.next([])
-    this.itemService.expiringItems$.next([])
-    this.itemService.expiredItems$.next([])
+    this.itemService.clearAllItems()
   }
 
   notChange() {
