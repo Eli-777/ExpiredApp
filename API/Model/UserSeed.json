@@ -1,6 +1,7 @@
 [
   {
-    "UserName": "test1",
+    "AsKnown": "test1",
+    "UserName": "test1@test.com",
     "Email": "test1@test.com",
     "Items": [
       {
@@ -79,7 +80,8 @@
     ]
   },
   {
-    "UserName": "test2",
+    "KnownAs": "test2",
+    "UserName": "test2@test.com",
     "Email": "test2@test.com",
     "Items": [
       {
@@ -158,7 +160,8 @@
     ]
   },
   {
-    "UserName": "test3",
+    "KnownAs": "test3",
+    "UserName": "test3@test.com",
     "Email": "test3@test.com",
     "Items": [
       {

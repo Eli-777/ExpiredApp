@@ -39,9 +39,10 @@ namespace API.Controllers
       {
         message = "Account is taken"
       };
-      if (await UserExit(registerDto.Email)) return BadRequest(response);
+      if (await UserExit(registerDto.Username)) return BadRequest(response);
 
       var user = _mapper.Map<AppUser>(registerDto);
+      user.Email = user.UserName;
 
       var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -62,7 +63,7 @@ namespace API.Controllers
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
       var user = await _userManager.Users
-        .SingleOrDefaultAsync(u => u.Email == loginDto.Email);
+        .SingleOrDefaultAsync(u => u.UserName == loginDto.UserName);
 
       var response = new ErrorResponse
       {

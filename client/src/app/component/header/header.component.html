@@ -2,39 +2,107 @@
   <div class="container">
     <div class="part-right">
       <a routerLink="/">
-        <img src="./assets/icon.png" alt="icon" class="icon mt-2 mb-2 mr-2">
+        <img src="./assets/icon.png" alt="icon" class="icon mt-2 mb-2 mr-2" />
         <h1 class="fz-title mr-2">Expired App</h1>
       </a>
-      <ul class="nav">
-        <li class="p-2"><a class="fz-captio" routerLink="/">Dashboard</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/items">所有物品</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/expiring">即將到期</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/expired">已過期</a></li>
-      </ul>
+      <ng-container *ngIf="(accountService.currentUser$ | async)">
+        <ul class="nav">
+          <li class="p-2"><a class="fz-captio" routerLink="/">Dashboard</a></li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/items">所有物品</a>
+          </li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/expiring">即將到期</a>
+          </li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/expired">已過期</a>
+          </li>
+        </ul>
+      </ng-container>
     </div>
     <div class="part-left">
       <ul class="nav">
-        <li class="p-2"><a class="fz-captio" routerLink="/items/add">新增物品</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/options/tag">管理選項</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/setting">設定</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/login">登入</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/register">註冊</a></li>
+        <ng-container *ngIf="(accountService.currentUser$ | async); else login">
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/items/add">新增物品</a>
+          </li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/options/tag">管理選項</a>
+          </li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/setting">設定</a>
+          </li>
+          <li class="p-2" (click)="logout()">
+            <a class="fz-captio" routerLink="/login">登出</a>
+          </li>
+        </ng-container>
+        <ng-template #login>
+          <li class="p-2"><a class="fz-captio" routerLink="/login">登入</a></li>
+          <li class="p-2">
+            <a class="fz-captio" routerLink="/register">註冊</a>
+          </li>
+        </ng-template>
       </ul>
     </div>
+
     <div class="part-mobile">
       <div class="nav-button" (click)="openNav()">
         <div class="hamburger"></div>
       </div>
       <ul class="part-mobile-nav" [class.click]="isClick">
-        <li class="p-2"><a class="fz-captio" routerLink="/" (click)="openNav()">Dashboard</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/items" (click)="openNav()">所有物品</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/expiring" (click)="openNav()">即將到期</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/expired" (click)="openNav()">已過期</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/items/add" (click)="openNav()">新增物品</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/options/tag" (click)="openNav()">管理選項</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/setting" (click)="openNav()">設定</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/login" (click)="openNav()">登入</a></li>
-        <li class="p-2"><a class="fz-captio" routerLink="/register" (click)="openNav()">註冊</a></li>
+        <ng-container *ngIf="accountService.currentUser$ | async; else loginMobile">
+
+          <li class="p-2">
+            <a class="fz-title" routerLink="/" (click)="openNav()">Dashboard</a>
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/items" (click)="openNav()"
+              >所有物品</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/expiring" (click)="openNav()"
+              >即將到期</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/expired" (click)="openNav()"
+              >已過期</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/items/add" (click)="openNav()"
+              >新增物品</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/options/tag" (click)="openNav()"
+              >管理選項</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/setting" (click)="openNav()"
+              >設定</a
+            >
+          </li>
+          <li class="p-2" *ngIf="accountService.currentUser$ | async; else login">
+            <a class="fz-title" routerLink="/login" (click)="openNav(true)"
+              >登出</a
+            >
+          </li>
+        </ng-container>
+        <ng-template #loginMobile>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/login" (click)="openNav()"
+              >登入</a
+            >
+          </li>
+          <li class="p-2">
+            <a class="fz-title" routerLink="/register" (click)="openNav()"
+              >註冊</a
+            >
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

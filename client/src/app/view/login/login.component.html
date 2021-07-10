@@ -4,18 +4,50 @@
     <div class="input-group m-2">
       <label for="account" class="fz-body">帳號</label>
       <mat-form-field appearance="fill">
-        <input matInput id="account" type="text" name="account" [(ngModel)]="user.account"/>
+        <input
+          matInput
+          id="account"
+          type="text"
+          name="account"
+          [(ngModel)]="user.username"
+          email
+          required
+        />
+        <mat-error *ngIf="loginForm.form.controls.account?.hasError('required')"
+          >請填寫註冊時 Email</mat-error
+        >
+        <mat-error *ngIf="loginForm.form.controls.account?.hasError('invalidAccount')"
+          >帳號登打錯誤或未建立帳號</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="input-group m-2">
       <label for="password" class="fz-body">密碼</label>
       <mat-form-field appearance="fill">
-        <input matInput id="password" type="password" name="password" [(ngModel)]="user.password" />
+        <input
+          matInput
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="user.password"
+          password
+          required
+        />
+        <mat-error *ngIf="loginForm.form.controls.password?.hasError('required')"
+          >請填寫密碼</mat-error
+        >
+        <mat-error *ngIf="loginForm.form.controls.password?.hasError('passwordWrong')"
+          >密碼錯誤</mat-error
+        >
       </mat-form-field>
     </div>
 
     <div class="button-wrapper mt-3">
-      <app-button [buttonName]="'登入'" btnClass="btn-add" [type]="'submit'" ></app-button>
+      <app-button
+        [buttonName]="'登入'"
+        btnClass="btn-add"
+        [type]="'submit'"
+      ></app-button>
 
       <app-button
         [buttonName]="'註冊'"

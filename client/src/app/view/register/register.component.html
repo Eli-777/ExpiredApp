@@ -2,32 +2,100 @@
   <h1 class="fz-title m-4">註冊</h1>
   <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
     <div class="input-group m-2">
-      <label for="account" class="fz-body">帳號</label>
+      <label for="account" class="fz-body">帳號(Email)</label>
       <mat-form-field appearance="fill">
-        <input matInput id="account" type="text" name="account" [(ngModel)]="user.account" />
+        <input
+          matInput
+          id="account"
+          type="text"
+          name="account"
+          [(ngModel)]="user.username"
+          email
+          required
+        />
+        <mat-error
+          *ngIf="
+            registerForm.form.controls.account?.hasError('required') ||
+            registerForm.form.controls.account?.hasError('email')
+          "
+          >請填寫 Email</mat-error
+        >
+        <mat-error
+          *ngIf="
+            registerForm.form.controls.account?.hasError('duplicateEmail')
+          "
+          >Email 已經註冊了</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="input-group m-2">
       <label for="username" class="fz-body">會員名稱</label>
       <mat-form-field appearance="fill">
-        <input matInput id="username" type="text" name="username" [(ngModel)]="user.username"/>
+        <input
+          matInput
+          id="username"
+          type="text"
+          name="username"
+          [(ngModel)]="user.knownAs"
+          required
+        />
+        <mat-error
+          *ngIf="registerForm.form.controls.username?.hasError('required')"
+          >請填寫名稱</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="input-group m-2">
       <label for="password" class="fz-body">密碼</label>
       <mat-form-field appearance="fill">
-        <input matInput id="password" type="password" name="password" [(ngModel)]="user.password"/>
+        <input
+          matInput
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="user.password"
+          required
+        />
+        <mat-error
+          *ngIf="registerForm.form.controls.password?.hasError('required')"
+          >請填寫密碼</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="input-group m-2">
-      <label for="passwordCheck" class="fz-body">確認密碼</label>
+      <label for="passwordConfirm" class="fz-body">確認密碼</label>
       <mat-form-field appearance="fill">
-        <input matInput id="passwordCheck" type="password" name="passwordCheck" [(ngModel)]="user.passwordCheck"/>
+        <input
+          matInput
+          id="passwordConfirm"
+          type="password"
+          name="passwordConfirm"
+          [(ngModel)]="user.passwordConfirm"
+          required
+        />
+        <mat-error
+          *ngIf="
+            registerForm.form.controls.passwordConfirm?.hasError('required')
+          "
+          >請確認密碼</mat-error
+        >
+        <mat-error
+          *ngIf="
+            registerForm.form.controls.passwordConfirm?.hasError(
+              'passwordCheck'
+            )
+          "
+          >密碼與確認密碼不一致</mat-error
+        >
       </mat-form-field>
     </div>
 
     <div class="button-wrapper mt-3">
-      <app-button [buttonName]="'註冊'" btnClass="btn-add" [type]="'submit'"></app-button>
+      <app-button
+        [buttonName]="'註冊'"
+        btnClass="btn-add"
+        [type]="'submit'"
+      ></app-button>
 
       <app-button
         [buttonName]="'登入'"

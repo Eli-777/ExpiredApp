@@ -57,8 +57,9 @@ namespace API.Model
       //建立 admin 帳戶
       var admin = new AppUser
       {
-        Email = "admin",
-        UserName = "admin"
+        KnownAs = "admin",
+        UserName = "admin@admin.com",
+        Email = "admin@admin.com"
       };
 
       await userManager.CreateAsync(admin, "Test123456");
