@@ -1,34 +1,44 @@
-import { User } from './../../interfaces/user';
+import { take } from 'rxjs/operators';
+import { SettingService } from './../../_services/setting.service';
 import { AccountService } from './../../_services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   isClick = false;
 
-  constructor(public accountService: AccountService) { }
+  constructor(
+    public accountService: AccountService,
+    private settingService: SettingService
+  ) {}
 
   ngOnInit(): void {
-    const localStorageUser = localStorage.getItem("user")
+    const localStorageUser = localStorage.getItem('user');
     if (localStorageUser) {
-      this.accountService.currentUser.next(JSON.parse(localStorageUser))
+      this.accountService.currentUser.next(JSON.parse(localStorageUser));
+      this.settingService
+        .getSettingData()
+        .pipe(take(1))
+        .subscribe(() => {
+          this.settingService.setColorTheme(
+            this.settingService.settingCache.isDarkMode
+          );
+        });
     }
   }
 
-  openNav(isLogout=false) {
-    this.isClick = !this.isClick
+  openNav(isLogout = false) {
+    this.isClick = !this.isClick;
     if (isLogout) {
-      this.logout()
+      this.logout();
     }
   }
 
   logout() {
-    this.accountService.logout()
+    this.accountService.logout();
   }
-
 }

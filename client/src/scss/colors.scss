@@ -6,16 +6,24 @@
   --error: #F7A399;
   --delete: #f3786a;
   --dark: #101112;
+  --form: #eddfd7;
+  --buttonWhite: #fff;
+  --alwaysDark: #101112;
+  --alwaysWhite: #fff;
 }
 
 [data-theme="dark"] {
   --primary: #101112;
   --second: #7e7777;
   --grey: #7e7777;
-  --light: #101112;
+  --light: #333538;
   --error: #F7A399;
   --delete: #f3786a;
   --dark: #e4e4e4;
+  --form: #44474b;
+  --buttonWhite: #333538;
+  --alwaysDark: #101112;
+  --alwaysWhite: #fff;
 }
 
 $primary: #ABD0CE;

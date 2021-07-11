@@ -45,6 +45,7 @@
         btnClass="btn-cancel"
         (click)="onCancel()"
         [type]="'button'"
+        [disabled]="settingService.isLoading"
       ></app-button>
     </div>
   </form>

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { Account } from 'src/app/interfaces/account';
 import { AccountService } from './../../_services/account.service';
+import { SettingService } from 'src/app/_services/setting.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit {
   user: Account = new Account();
   isPasswordWrong = false;
 
-  constructor(public accountService: AccountService,private router: Router) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private settingService: SettingService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,7 +31,15 @@ export class LoginComponent implements OnInit {
         .pipe(take(1))
         .subscribe(
           () => {
-            this.router.navigate(['/'])
+            this.settingService
+              .getSettingData()
+              .pipe(take(1))
+              .subscribe(() => {
+                this.settingService.setColorTheme(
+                  this.settingService.settingCache.isDarkMode
+                );
+                this.router.navigate(['/']);
+              });
           },
           (error) => {
             const errorMessage = error.error.message;

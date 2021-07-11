@@ -1,7 +1,6 @@
 .form-center-wrapper {
-  @include flex(center, center, column)
+  @include flex(center, center, column);
 }
-
 
 .input-group {
   display: flex;
@@ -12,10 +11,22 @@
     width: 12rem;
   }
 
+
   .mat-form-field-infix {
     width: 20rem;
   }
 
+  .mat-select-value {
+    color: var(--dark);
+  }
+
+  .mat-form-field-flex {
+    background-color: var(--form);
+  }
+}
+
+input {
+  color: var(--dark);
 }
 
 .slide-toggle {
@@ -26,13 +37,12 @@
   }
 
   &-filed {
-    width: calc(20rem + 0.75em *2);
+    width: calc(20rem + 0.75em * 2);
     height: 3.6rem;
     display: flex;
     align-items: center;
   }
 }
-
 
 .button-wrapper {
   display: flex;

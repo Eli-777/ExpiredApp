@@ -1,17 +1,21 @@
 .btn {
-  background-color: #fff;
+  background-color: var(--buttonWhite);
+  color: var(--dark);
   padding: 0.8rem 1.2rem;
   border-radius: 0.4rem;
   box-shadow: 0 0 0.2rem 0rem var(--dark);
   font-size: 1.2rem;
 
   &:hover {
+    color: var(--alwaysDark);
     background-color: darken(#fff, 10%);
   }
 
   &-error {
+    color: var(--alwaysDark);
     background-color: var(--error);
     &:hover {
+      color: var(--alwaysWhite);
       background-color: var(--delete) !important;
     }
   }

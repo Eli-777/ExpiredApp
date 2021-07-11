@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { SettingService } from './../../_services/setting.service';
 import { Setting } from './../../interfaces/setting';
@@ -8,41 +8,43 @@ import { Setting } from './../../interfaces/setting';
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
 })
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnInit, OnDestroy {
   settingOption: Setting = new Setting();
 
-  constructor(private settingService: SettingService) {}
+  constructor(public settingService: SettingService) {}
 
   ngOnInit(): void {
     this.settingService
       .getSettingData()
       .pipe(take(1))
       .subscribe((setting) => {
-        console.log(setting);
-
         this.settingOption = { ...setting };
+        this.darkModeToggle();
       });
   }
 
   onSubmit() {
-    this.settingService
-      .updateSetting(this.settingOption)
-      .pipe(take(1))
-      .subscribe(
-        () => (this.settingService.settingCache = { ...this.settingOption })
-      );
+    if (!this.settingService.isLoading) {
+      this.settingService
+        .updateSetting(this.settingOption)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.settingService.settingCache = { ...this.settingOption };
+          this.settingService.isLoading = false;
+        });
+    }
   }
 
   onCancel() {
     this.settingOption = { ...this.settingService.settingCache };
+    this.darkModeToggle();
   }
 
   darkModeToggle() {
-    console.log(this.settingOption);
-    if(this.settingOption.isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "dark")
-    } else {
-      document.documentElement.setAttribute("data-theme", "light")
-    }
+    this.settingService.setColorTheme(this.settingOption.isDarkMode);
+  }
+
+  ngOnDestroy(): void {
+    this.onCancel();
   }
 }
