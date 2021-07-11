@@ -25,14 +25,16 @@ namespace API.Controllers
     public async Task<ActionResult<SettingDto>> GetSetting()
     {
       var userId = User.GetUserId();
+      var user = await _unitOfWork.UserRepository.GetUser(userId);
       var setting = await _unitOfWork.SettingRepository.GetSettingForUser(userId);
 
       var response = new ErrorResponse
       {
         message = "This user setting is not found"
       };
-      if (setting == null) return NotFound(response);
+      if (setting == null || user == null) return NotFound(response);
        var settingDto = _mapper.Map<SettingDto>(setting);
+       settingDto.KnownAs = user.KnownAs;
       return settingDto;
     }
 
@@ -40,9 +42,12 @@ namespace API.Controllers
     public async Task<ActionResult> UpdateSetting(SettingDto settingDto)
     {
       var userId = User.GetUserId();
+      var user = await _unitOfWork.UserRepository.GetUser(userId);
+      user.KnownAs = settingDto.KnownAs;
       var originSetting = await _unitOfWork.SettingRepository.GetSettingForUser(userId);
       _mapper.Map(settingDto, originSetting);
 
+      _unitOfWork.UserRepository.UpdateUser(user);
       _unitOfWork.SettingRepository.UpdateSetting(originSetting);
       if (await _unitOfWork.Complete()) return Ok();
 

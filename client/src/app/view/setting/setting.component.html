@@ -9,7 +9,7 @@
           id="expiringDay"
           type="number"
           name="expiringDay"
-          [(ngModel)]="settingOption.expiringDay"
+          [(ngModel)]="settingOption.fromExpiredDay"
         />
       </mat-form-field>
     </div>
@@ -21,7 +21,7 @@
           id="username"
           type="text"
           name="username"
-          [(ngModel)]="settingOption.username"
+          [(ngModel)]="settingOption.knownAs"
         />
       </mat-form-field>
     </div>
@@ -32,7 +32,7 @@
           name="darkMode"
           color="primary"
           (change)="darkModeToggle()"
-          [(ngModel)]="settingOption.darkMode"
+          [(ngModel)]="settingOption.isDarkMode"
         ></mat-slide-toggle>
       </div>
     </div>
@@ -43,7 +43,7 @@
       <app-button
         [buttonName]="'取消'"
         btnClass="btn-cancel"
-        routerLink="/register"
+        (click)="onCancel()"
         [type]="'button'"
       ></app-button>
     </div>

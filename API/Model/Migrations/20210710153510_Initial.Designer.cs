@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Model.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210709055145_changeSettingIsDarkName")]
-    partial class changeSettingIsDarkName
+    [Migration("20210710153510_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,9 @@ namespace API.Model.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("KnownAs")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -94,6 +97,9 @@ namespace API.Model.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("SettingId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
@@ -109,6 +115,8 @@ namespace API.Model.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("SettingId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -199,10 +207,8 @@ namespace API.Model.Migrations
 
             modelBuilder.Entity("API.Entities.Setting", b =>
                 {
-                    b.Property<int>("id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AppUserId")
+                    b.Property<int>("SettingId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("FromExpiredDay")
@@ -211,7 +217,7 @@ namespace API.Model.Migrations
                     b.Property<bool>("IsDarkMode")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("id");
+                    b.HasKey("SettingId");
 
                     b.ToTable("Settings");
                 });
@@ -322,6 +328,17 @@ namespace API.Model.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("API.Entities.AppUser", b =>
+                {
+                    b.HasOne("API.Entities.Setting", "Setting")
+                        .WithMany()
+                        .HasForeignKey("SettingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Setting");
+                });
+
             modelBuilder.Entity("API.Entities.AppUserRole", b =>
                 {
                     b.HasOne("API.Entities.AppRole", "Role")
@@ -367,17 +384,6 @@ namespace API.Model.Migrations
                     b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Locations")
                         .HasForeignKey("AppUserId");
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("API.Entities.Setting", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithOne("Setting")
-                        .HasForeignKey("API.Entities.Setting", "id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -437,8 +443,6 @@ namespace API.Model.Migrations
                     b.Navigation("Items");
 
                     b.Navigation("Locations");
-
-                    b.Navigation("Setting");
 
                     b.Navigation("Tags");
 

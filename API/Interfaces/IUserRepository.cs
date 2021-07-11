@@ -6,5 +6,6 @@ namespace API.Interfaces
     public interface IUserRepository
     {
         Task<AppUser> GetUser(int id);
+        void UpdateUser(AppUser user);
     }
 }

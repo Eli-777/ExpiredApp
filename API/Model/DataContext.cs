@@ -34,13 +34,7 @@ namespace API.Model
         .WithOne(u => u.Role)
         .HasForeignKey(ur => ur.RoleId)
         .IsRequired();
-
-      builder.Entity<AppUser>()
-        .HasOne(ur => ur.Setting)
-        .WithOne(s => s.AppUser)
-        .HasForeignKey<Setting>(s => s.id)
-        .IsRequired();
-        
+ 
     }
 
   }

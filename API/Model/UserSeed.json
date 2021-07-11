@@ -1,6 +1,6 @@
 [
   {
-    "AsKnown": "test1",
+    "KnownAs": "test1",
     "UserName": "test1@test.com",
     "Email": "test1@test.com",
     "Items": [

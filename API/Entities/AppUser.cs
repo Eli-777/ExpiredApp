@@ -10,6 +10,7 @@ namespace API.Entities
         public ICollection<Item> Items { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public Setting Setting { get; set; } = new Setting {};
+        public int SettingId { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<Tag> Tags { get; set; }
         public ICollection<Location> Locations { get; set; }

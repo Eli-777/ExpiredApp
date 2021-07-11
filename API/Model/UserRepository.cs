@@ -20,5 +20,10 @@ namespace API.Model
         .Include(u => u.Items)
         .SingleOrDefaultAsync(u => u.Id == id);
     }
+
+    public void UpdateUser(AppUser user)
+    {
+      _context.Users.Update(user);
+    }
   }
 }

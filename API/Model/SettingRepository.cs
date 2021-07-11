@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Model
 {
@@ -14,7 +16,7 @@ namespace API.Model
 
     public async Task<Setting> GetSettingForUser(int userId)
     {
-      return await _context.Settings.FindAsync(userId);
+      return await _context.Settings.SingleOrDefaultAsync(s => s.SettingId == userId);
     }
 
     public void UpdateSetting(Setting setting)
