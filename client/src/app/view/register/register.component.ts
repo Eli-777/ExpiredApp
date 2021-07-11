@@ -29,8 +29,6 @@ export class RegisterComponent implements OnInit {
           () => this.router.navigateByUrl('/'),
           (error) => {
             const errorMessage = error.error;
-            console.log(errorMessage);
-            console.log(errorMessage.message);
             
             if (errorMessage.message === "Account is taken") {
               this.registerForm.form.controls.account.setErrors({

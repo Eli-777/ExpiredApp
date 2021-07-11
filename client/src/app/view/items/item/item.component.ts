@@ -1,3 +1,4 @@
+import { SettingService } from 'src/app/_services/setting.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,13 +31,16 @@ export class ItemComponent implements OnInit {
   expiryDate: any = null;
   guaranteePeriod: any = null;
 
+  fromExpiredDay = this.settingService.settingCache.fromExpiredDay
+
   constructor(
     private route: ActivatedRoute,
     public itemService: ItemService,
     private optionService: OptionService,
     private router: Router,
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private settingService: SettingService
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +83,7 @@ export class ItemComponent implements OnInit {
       const inputRawValue = this.itemForm.getRawValue();
   
       this.itemService
-        .addItem(inputRawValue)
+        .addItem(inputRawValue, this.fromExpiredDay)
         .pipe(take(1))
         .subscribe(() => {
           this.router.navigate(['/items']);
@@ -104,9 +108,11 @@ export class ItemComponent implements OnInit {
       const editedItem = { ...this.item, ...inputRawValue };
       editedItem.tag = newTagSelect;
       editedItem.location = newLocationSelect;
+
+      
   
       this.itemService
-        .editItem(+this.itemId!, editedItem)
+        .editItem(+this.itemId!, editedItem, this.fromExpiredDay)
         .pipe(take(1))
         .subscribe(() => {
           if (isUpdateImg) {

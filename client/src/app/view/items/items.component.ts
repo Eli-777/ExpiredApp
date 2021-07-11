@@ -1,3 +1,4 @@
+import { SettingService } from 'src/app/_services/setting.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -17,7 +18,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
   page: string = ''
   pageTitle: string = '所有物品'
 
-  constructor(public itemService: ItemService, private route: ActivatedRoute) {}
+  constructor(
+    public itemService: ItemService, 
+    private route: ActivatedRoute, 
+    private settingService: SettingService
+  ) {}
 
 
   ngOnInit(): void {
@@ -26,8 +31,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     if (this.page === 'expiring')  this.pageTitle = "即將到期"
     if (this.page === 'expired')  this.pageTitle = "已過期"
 
-    if (this.page === 'expiring' && !this.itemService.expiringItems$.value.length) {
-      this.getData(new ItemParams(50, false));
+    if (this.page === 'expiring' && !this.itemService.expiringItems$.value.length) {  
+      const fromExpiredDay = this.settingService.settingCache.fromExpiredDay
+      this.getData(new ItemParams(fromExpiredDay, false));
+     
     } else if (this.page === 'expired' && !this.itemService.expiredItems$.value.length) {
       this.getData(new ItemParams(-1, true));
     } else if (this.page === 'items' && !this.itemService.items$.value.length){
