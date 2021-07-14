@@ -8,34 +8,45 @@ import { RegisterComponent } from './view/register/register.component';
 import { SettingComponent } from './view/setting/setting.component';
 import { OptionsComponent } from './view/options/options.component';
 import { OptionListsComponent } from './view/options/option-lists/option-lists.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent },
   {
-    path: 'items',
-    component: ItemsComponent,
+    path: '',
+    component: HomepageComponent,
   },
   {
-    path: 'items/add',
-    component: ItemComponent,
-  },
-  {
-    path: 'items/:id',
-    component: ItemComponent,
-  },
-  { path: 'expiring', component: ItemsComponent },
-  { path: 'expired', component: ItemsComponent },
-  {
-    path: 'options',
-    component: OptionsComponent,
+    path: '',
+    canActivate: [AuthGuard],
     children: [
-      { path: 'tag', component: OptionListsComponent },
-      { path: 'location', component: OptionListsComponent },
+      {
+        path: 'items',
+        component: ItemsComponent,
+      },
+      {
+        path: 'items/add',
+        component: ItemComponent,
+      },
+      {
+        path: 'items/:id',
+        component: ItemComponent,
+      },
+      { path: 'expiring', component: ItemsComponent },
+      { path: 'expired', component: ItemsComponent },
+      {
+        path: 'options',
+        component: OptionsComponent,
+        children: [
+          { path: 'tag', component: OptionListsComponent },
+          { path: 'location', component: OptionListsComponent },
+        ],
+      },
+      { path: 'setting', component: SettingComponent },
     ],
   },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'setting', component: SettingComponent },
 ];
 
 @NgModule({
