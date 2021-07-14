@@ -38,6 +38,7 @@ import { OptionListComponent } from './view/options/option-list/option-list.comp
 import { PieComponent } from './component/chart/pie/pie.component';
 import { GaugeComponent } from './component/chart/gauge/gauge.component';
 import { StackedHorizontalBarComponent } from './component/chart/stacked-horizontal-bar/stacked-horizontal-bar.component';
+import { NotFoundComponent } from './view/not-found/not-found.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -68,6 +69,7 @@ export const TW_FORMATS = {
     PieComponent,
     GaugeComponent,
     StackedHorizontalBarComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+.notFound {
+  &-wrapper {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+
+
+  &-img {
+    mix-blend-mode: multiply;
+    width: 80%;
+  }
+}
