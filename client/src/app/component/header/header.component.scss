@@ -5,6 +5,7 @@
   top: 0;
   width: 100vw;
   z-index: 2000;
+  letter-spacing: 0.2rem;
 
 
   .container {
@@ -22,6 +23,11 @@
     .icon {
       width: 4rem;
     }
+  }
+
+  a.click,
+  a:hover {
+    color: var(--delete);
   }
 
   .part-mobile {

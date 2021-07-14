@@ -18,12 +18,10 @@ export class PieComponent implements OnInit, OnChanges {
   chartBackgroundColor = this.theme === 'dark' ? '#333538' : '#F0E5DE';
   chartOption: EChartsOption = {};
   @Input() seriesData: object[] = [];
-  echartsInstance: any;
 
   constructor(private settingService: SettingService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setChartOption(seriesData: object[] = []) {
     this.chartOption = {
@@ -57,12 +55,6 @@ export class PieComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setChartOption(this.seriesData);
-  }
-
-  onChartInit(ec: any) {
-    // if (!this.echartsInstance) {
-      this.echartsInstance = ec;
-    //} 
   }
 
 }

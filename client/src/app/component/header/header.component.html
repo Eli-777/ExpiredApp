@@ -5,41 +5,75 @@
         <img src="./assets/icon.png" alt="icon" class="icon mt-2 mb-2 mr-2" />
         <h1 class="fz-title mr-2">Expired App</h1>
       </a>
-      <ng-container *ngIf="(accountService.currentUser$ | async)">
-        <ul class="nav">
-          <li class="p-2"><a class="fz-captio" routerLink="/">Dashboard</a></li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/items">所有物品</a>
+      <ng-container *ngIf="accountService.currentUser$ | async">
+        <ul class="nav fw-bold">
+          <li class="pl-2">
+            <a
+              class="fz-captio"
+              routerLink="/"
+              routerLinkActive="click"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Dashboard</a
+            >
           </li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/expiring">即將到期</a>
+          <li class="pl-2">
+            <a class="fz-captio" routerLink="/items" routerLinkActive="click"
+              >所有物品</a
+            >
           </li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/expired">已過期</a>
+          <li class="pl-2">
+            <a class="fz-captio" routerLink="/expiring" routerLinkActive="click"
+              >即將到期</a
+            >
+          </li>
+          <li class="pl-2">
+            <a class="fz-captio" routerLink="/expired" routerLinkActive="click"
+              >已過期</a
+            >
           </li>
         </ul>
       </ng-container>
     </div>
     <div class="part-left">
-      <ul class="nav">
-        <ng-container *ngIf="(accountService.currentUser$ | async); else login">
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/items/add">新增物品</a>
+      <ul class="nav fw-bold">
+        <ng-container *ngIf="accountService.currentUser$ | async; else login">
+          <li class="pr-2">
+            <a
+              class="fz-captio"
+              routerLink="/items/add"
+              routerLinkActive="click"
+              >新增物品</a
+            >
           </li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/options/tag">管理選項</a>
+          <li class="pr-2">
+            <a
+              class="fz-captio"
+              routerLink="/options/tag"
+              routerLinkActive="click"
+              >管理選項</a
+            >
           </li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/setting">設定</a>
+          <li class="pr-2">
+            <a class="fz-captio" routerLink="/setting" routerLinkActive="click"
+              >設定</a
+            >
           </li>
-          <li class="p-2" (click)="logout()">
-            <a class="fz-captio" routerLink="/login">登出</a>
+          <li (click)="logout()">
+            <a class="fz-captio" routerLink="/login" routerLinkActive="click"
+              >登出</a
+            >
           </li>
         </ng-container>
         <ng-template #login>
-          <li class="p-2"><a class="fz-captio" routerLink="/login">登入</a></li>
-          <li class="p-2">
-            <a class="fz-captio" routerLink="/register">註冊</a>
+          <li class="pr-2 fw-bold">
+            <a class="fz-captio" routerLink="/login" routerLinkActive="click"
+              >登入</a
+            >
+          </li>
+          <li class="pr-2 fw-bold">
+            <a class="fz-captio" routerLink="/register" routerLinkActive="click"
+              >註冊</a
+            >
           </li>
         </ng-template>
       </ul>
@@ -50,8 +84,9 @@
         <div class="hamburger"></div>
       </div>
       <ul class="part-mobile-nav" [class.click]="isClick">
-        <ng-container *ngIf="accountService.currentUser$ | async; else loginMobile">
-
+        <ng-container
+          *ngIf="accountService.currentUser$ | async; else loginMobile"
+        >
           <li class="p-2">
             <a class="fz-title" routerLink="/" (click)="openNav()">Dashboard</a>
           </li>
@@ -85,7 +120,10 @@
               >設定</a
             >
           </li>
-          <li class="p-2" *ngIf="accountService.currentUser$ | async; else login">
+          <li
+            class="p-2"
+            *ngIf="accountService.currentUser$ | async; else login"
+          >
             <a class="fz-title" routerLink="/login" (click)="openNav(true)"
               >登出</a
             >
@@ -93,9 +131,7 @@
         </ng-container>
         <ng-template #loginMobile>
           <li class="p-2">
-            <a class="fz-title" routerLink="/login" (click)="openNav()"
-              >登入</a
-            >
+            <a class="fz-title" routerLink="/login" (click)="openNav()">登入</a>
           </li>
           <li class="p-2">
             <a class="fz-title" routerLink="/register" (click)="openNav()"
