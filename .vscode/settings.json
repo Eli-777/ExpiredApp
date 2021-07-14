@@ -3,6 +3,7 @@
     "cloudinary",
     "datepicker",
     "dtos",
+    "echarts",
     "hmac",
     "mixins"
   ]

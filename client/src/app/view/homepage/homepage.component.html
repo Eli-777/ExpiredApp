@@ -1,1 +1,19 @@
-<p>homepage works!</p>
+<div class="container form-center-wrapper pb-4">
+  <h1 class="fz-title m-4">Dashboard</h1>
+  <div class="row">
+    <app-pie [seriesData]="pieData"></app-pie>
+    <app-gauge [data]="gaugeDataSpotRate"></app-gauge>
+    <app-gauge
+      [data]="gaugeDataExpirationRate"
+      color="#f3786a"
+      [title]="gaugeTitleExpirationRate"
+    ></app-gauge>
+  </div>
+  <app-stacked-horizontal-bar
+    class="stacked-horizontal-bar"
+    [seriesNotExpiredData]="horizontalBarData.seriesNotExpiredData"
+    [seriesExpiringData]="horizontalBarData.seriesExpiringData"
+    [seriesExpiredData]="horizontalBarData.seriesExpiredData"
+    [yAxis]="yAxis"
+  ></app-stacked-horizontal-bar>
+</div>

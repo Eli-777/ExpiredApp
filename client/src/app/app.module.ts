@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,9 @@ import { SettingComponent } from './view/setting/setting.component';
 import { OptionsComponent } from './view/options/options.component';
 import { OptionListsComponent } from './view/options/option-lists/option-lists.component';
 import { OptionListComponent } from './view/options/option-list/option-list.component';
+import { PieComponent } from './component/chart/pie/pie.component';
+import { GaugeComponent } from './component/chart/gauge/gauge.component';
+import { StackedHorizontalBarComponent } from './component/chart/stacked-horizontal-bar/stacked-horizontal-bar.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -60,6 +64,9 @@ export const TW_FORMATS = {
     OptionsComponent,
     OptionListsComponent,
     OptionListComponent,
+    PieComponent,
+    GaugeComponent,
+    StackedHorizontalBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +82,9 @@ export const TW_FORMATS = {
     MatSlideToggleModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },

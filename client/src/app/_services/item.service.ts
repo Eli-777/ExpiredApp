@@ -1,7 +1,7 @@
 import { SettingService } from 'src/app/_services/setting.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { Item } from '../interfaces/items';
 import { ItemParams } from './../interfaces/itemParams';
@@ -26,7 +26,7 @@ export class ItemService {
     params = params.append('isExpired', itemParams.isExpired!);
 
     return this.http.get<Item[]>(this.baseUrl + 'item', { params }).pipe(
-      map((items) => {
+      tap((items) => {
         if (itemParams.fromExpiredDay > 0) {
           this.expiringItems$.next(items);
         } else if (itemParams.isExpired) {
