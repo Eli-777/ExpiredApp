@@ -17,7 +17,11 @@
             >
           </li>
           <li class="pl-2">
-            <a class="fz-captio" routerLink="/items" routerLinkActive="click"
+            <a
+              class="fz-captio"
+              routerLink="/items"
+              routerLinkActive="click"
+              [routerLinkActiveOptions]="{ exact: true }"
               >所有物品</a
             >
           </li>

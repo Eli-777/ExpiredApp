@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { SettingService } from './../../_services/setting.service';
 import { Setting } from './../../interfaces/setting';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-setting',
@@ -11,7 +12,7 @@ import { Setting } from './../../interfaces/setting';
 export class SettingComponent implements OnInit, OnDestroy {
   settingOption: Setting = new Setting();
 
-  constructor(public settingService: SettingService) {}
+  constructor(public settingService: SettingService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.settingService
@@ -31,6 +32,7 @@ export class SettingComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.settingService.settingCache = { ...this.settingOption };
           this.settingService.isLoading = false;
+          this.toastr.success('設定成功')
         });
     }
   }

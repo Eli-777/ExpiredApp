@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,6 +83,9 @@ export const TW_FORMATS = {
     MatSlideToggleModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

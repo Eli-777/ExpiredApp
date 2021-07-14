@@ -5,6 +5,7 @@
     "dtos",
     "echarts",
     "hmac",
-    "mixins"
+    "mixins",
+    "toastr"
   ]
 }
