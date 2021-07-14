@@ -1,6 +1,16 @@
 <div class="container items-wrapper pb-4">
-  <h1 class="fz-title m-4">{{pageTitle}}</h1>
+  <h1 class="fz-title m-4">{{ pageTitle }}</h1>
   <div class="cards">
-    <app-card *ngFor="let item of items" [item]="item"></app-card>
+    <ng-container *ngIf="itemService.isLoading; else card">
+      <app-card-skeleton
+        *ngFor="let item of [].constructor(4)"
+      ></app-card-skeleton>
+    </ng-container>
+
+    <ng-template #card>
+      <app-card *ngFor="let item of items" [item]="item"></app-card>
+    </ng-template>
+
+    <h1 class="fw-bold" *ngIf="!itemService.isLoading && items.length === 0">沒有物品</h1>
   </div>
 </div>

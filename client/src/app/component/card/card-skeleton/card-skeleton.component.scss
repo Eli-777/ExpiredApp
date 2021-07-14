@@ -1,0 +1,53 @@
+$light: #d9d4cf;
+$dark: #101112;
+
+.card {
+  width: calc((98rem - 6.4rem -0.8rem) / 4);
+  flex: 1;
+
+  &-border {
+    height: 30rem;
+    border: 0.2rem solid var(--second);
+    border-radius: 1.2rem;
+    box-shadow: 0rem 0rem 0.2rem 0.2rem var(--second);
+    position: relative;
+  }
+
+  &-img-wrapper {
+    height: 20rem;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &-title {
+    width: calc(17rem - 4rem * 2);
+    height: 1.6rem;
+  }
+
+  &-text {
+    width: calc(17rem - 0.6rem * 2);
+    height: 1.2rem;
+  }
+
+  &-img-wrapper,
+  &-title,
+  &-text {
+    background: linear-gradient(
+      90deg,
+      rgba($light, 1) 0%,
+      rgba($dark, 0.3) 20% ,
+      rgba($light, 1) 100%
+    );
+    background-size: 200%;
+    background-position: 0%;
+    animation: skeleton 1s infinite;
+  }
+
+}
+
+@keyframes skeleton  {
+  100% {
+    background-position: -100% ;
+  }
+}

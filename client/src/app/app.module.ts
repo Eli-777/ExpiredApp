@@ -39,6 +39,7 @@ import { PieComponent } from './component/chart/pie/pie.component';
 import { GaugeComponent } from './component/chart/gauge/gauge.component';
 import { StackedHorizontalBarComponent } from './component/chart/stacked-horizontal-bar/stacked-horizontal-bar.component';
 import { NotFoundComponent } from './view/not-found/not-found.component';
+import { CardSkeletonComponent } from './component/card/card-skeleton/card-skeleton.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -70,6 +71,7 @@ export const TW_FORMATS = {
     GaugeComponent,
     StackedHorizontalBarComponent,
     NotFoundComponent,
+    CardSkeletonComponent,
   ],
   imports: [
     BrowserModule,
