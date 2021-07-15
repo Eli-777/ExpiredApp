@@ -1,4 +1,6 @@
-@import '../../../styles.scss';
+@import '../../../scss/rwd.scss';
+@import '../../../scss/flex.scss';
+
 
 .items-wrapper {
   @include flex(center, center, column)

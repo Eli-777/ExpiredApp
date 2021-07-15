@@ -1,6 +1,5 @@
-import { NotFoundComponent } from './view/not-found/not-found.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './view/homepage/homepage.component';
 import { ItemsComponent } from './view/items/items.component';
 import { ItemComponent } from './view/items/item/item.component';
@@ -9,11 +8,13 @@ import { RegisterComponent } from './view/register/register.component';
 import { SettingComponent } from './view/setting/setting.component';
 import { OptionsComponent } from './view/options/options.component';
 import { OptionListsComponent } from './view/options/option-lists/option-lists.component';
+import { NotFoundComponent } from './view/not-found/not-found.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: HomepageComponent,
   },
   {
@@ -55,7 +56,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

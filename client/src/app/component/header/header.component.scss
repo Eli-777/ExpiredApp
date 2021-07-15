@@ -1,4 +1,7 @@
-@import "../../../styles.scss";
+@import "../../../scss/rwd.scss";
+@import "../../../scss/flex.scss";
+
+
 .header {
   background-color: var(--primary);
   position: fixed;
