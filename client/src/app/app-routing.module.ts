@@ -16,6 +16,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: HomepageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '',
